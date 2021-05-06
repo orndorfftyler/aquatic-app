@@ -30,6 +30,7 @@ class Signup extends React.Component {
                         </section>
 
                         </form>
+                        <Link to='/login'><p>Already have an account? Log in here</p></Link>
                 </main>
 
             </div>
