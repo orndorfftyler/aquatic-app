@@ -4,10 +4,18 @@ const AquaticContext = React.createContext({
   results: [],
   answers: [],
   users: [],
-  showHideNewReviewInput: '',
   currentUser: '',
+  currentUsernam: '',
   loggedIn: false,
-  setLogged: () => {}
+  setLogged: () => {},
+  updateTerm: () => {},
+  searchHandler: () => {},
+  addAnswer: () => {},
+  updateCurrentUser: () => {},
+  getAnswers: () => {},
+  patchAnswer: () => {},
+  deleteAnswer: () => {},
+
 })
 
 export default AquaticContext;

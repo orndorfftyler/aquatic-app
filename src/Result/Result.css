@@ -1,0 +1,46 @@
+.result {
+  width:300px;
+  background: #9FE6FD;
+  border-radius: 30px;
+  margin:auto;
+  margin: 10px 0;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  object-fit: cover;
+  width: 200px;
+  object-fit: cover;
+}
+
+.picdesc {
+  display:flex;
+  flex-direction: column;
+}
+
+@media all and (min-width: 1000px) {
+    
+  .result {
+    width:60%;
+  }
+
+  .picdesc {
+    flex-direction: row;
+  }
+
+
+  .desc {
+    margin: 0 20px;
+  }
+
+  img {
+    margin: 0 20px;
+
+    margin-bottom:20px;
+  }
+
+}

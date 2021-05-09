@@ -3,9 +3,9 @@ import Result from '../Result/Result';
 import AquaticContext from '../AquaticContext';
 import AnswerList from '../AnswerList/AnswerList';
 import Navbar from '../Navbar/Navbar';
-import './question.css';
+import './Question.css';
 
-class Book extends React.Component {
+class Question extends React.Component {
     static contextType = AquaticContext;
 
     constructor(props) {
@@ -14,86 +14,103 @@ class Book extends React.Component {
             current: {},
             content:'',
             title:'',
-            showHideReviewInput: 'show'
+            showHideAnswerInput: 'show'
         }
     }
 
+    updateContent(content) {
+        this.setState({content: content});
+    }
+
+    updateTitle(title) {
+        this.setState({title: title});
+    }
+
+    updateShowHideAnswerInput(state) {
+        this.setState({showHideAnswerInput: state});
+    }
 
     componentDidMount = () => {
+
         window.scrollTo(0,0);
-        console.log('book mounted');
+
     }
 
-    nothing(e) {
+    showHideAnswer(e, question_id, title, content) {
         e.preventDefault();
+        this.updateShowHideAnswerInput('hide');
+        this.context.addAnswer(e, question_id, title, content);
     }
-
 
     render() {
-        let bookId = this.props.match.params.bookId;
-        let current = this.context.results.find(book => book.identifier == bookId);
+        let question_id = this.props.match.params.question_id;
+        let current = this.context.results.find(question => question.question_id == question_id);
+
+        let answerUserCheck = 'question show';
+        if (this.context.currentUser) {
+            for (let i = 0; i < this.context.answers.length; i++) {
+                if (this.context.answers[i]['user_id'] == this.context.currentUser) {
+                    answerUserCheck = 'question hide';
+                }
+            }
+    
+        } else {
+            for (let i = 0; i < this.context.answers.length; i++) {
+                if (this.context.answers[i]['user_id'] == localStorage.getItem('currentUser')) {
+                    answerUserCheck = 'question hide';
+                }
+            }
+        }
         
         return (
-            <div className="look">
+            
+            <div className="question-page">
 
                 <Navbar 
                     historyProp={this.props.history}
                 />
 
-                <main role="main">
-                    <form>
+                <div className="spacer"></div>
 
-                    <section class="centered">
-                        <h3>How much seagrass can I fit in a 5 gallon tank?</h3>
-                        <div>
-                        <p>I would like to harvest at least 5 kilos a month.</p>
-                        </div>
-                    </section>
+                <Result 
+                    title={current.title}
+                    username={current.username}
+                    contents={current.contents}
+                    question_id={current.question_id}
+                    linkify={false}
+                />
 
-                    <section class="form-section overview-section">
-                        <label for="username">Can you help out?</label>
-                        <textarea type="text" name="username" placeholder="Write your answer here" required>
-                        
-                        </textarea>
-                        <button onClick={e => this.nothing(e)}>Submit</button>
-                    </section>
+                <div className={answerUserCheck}>
+                    <div className={this.state.showHideAnswerInput}>
+                        <form className="question" onSubmit={(e) => this.showHideAnswer(e, current.identifier, this.state.title, this.state.content)}>
+                            <section className="prompt">
+                                <h3 className="prompt">Do you know the answer?</h3>
+                                <label htmlFor="title">Title</label>
+                                <input  className="question" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
 
-                    <section>
-                        <h5>I see you are a fellow seagrass connoisseur! I have been farming 
-                        seagrass for 5 years and I would love to help you out... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                <label htmlFor="content">Answer:</label>
+                                <textarea  className="question" type="text" name="content" placeholder="Write your answer here" required onChange={e => this.updateContent(e.target.value)}>
+                                
+                                </textarea>
+                                <div>
+                                    <button className="question" type="submit">Submit</button>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
 
-                        </h5>
-                        <p>9 people found this helpful</p>
-                        <button type="submit">This answer was helpful</button>
-                    </section>
+                    <AnswerList 
+                        answers={this.context.answers}
+                        currentQuestion={current}
+                        historyProp={this.props.history}
+                    />
                     
-                    <section>
-                        <h5>Why are you trying to grow so much seagrass? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</h5>
-                        <p>8 people found this helpful</p>
-                        <button type="submit">This answer was helpful</button>
-                    </section>
-
-                    <section>
-                        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</h5>
-                        <p>Review content</p>
-                        <p>7 people found this helpful</p>
-                        <button type="submit">This answer was helpful</button>
-                    </section>
-
-                    <section>
-                        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</h5>
-                        <p>Review content</p>
-                        <p>6 people found this helpful</p>
-                        <button type="submit">This answer was helpful</button>
-                    </section>
-
-                    </form>
-                </main>
-
-
+                <div className="spacer"></div>
             </div>
-        );
+            
+    );
     }
 }
 
-export default Book;
+export default Question;

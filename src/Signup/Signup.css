@@ -1,45 +1,61 @@
-* {
-  box-sizing: border-box;
+div.signup-page, div.login-page {
+  background-color: #fff;
+  height:100%;
+  width:100%;
+  margin:0;
+  padding:0;
+  position:relative;
 }
 
-body {
+footer {
+  position:absolute;
+  bottom:0;
+  height: 50px;
+  width:100%;
+  background-color: #9FE6FD;
+  z-index: 10;
+}
+
+.look {
   font-family: "Open Sans",
   sans-serif;
   font-size: 20px;
   color: #444;
   text-align: center;
   line-height: 1.5;
-  min-width: 320px;
-}
-
-nav,
-footer {
-  padding: 1% 0;
-  background-color: #aaa;
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
 }
 
 header {
   padding: 45px 15px;
 }
-
-section {
-  padding: 30px 15px 0;
+  
+.valerror {
+  position:absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #FFD999;
+  height: 28px;
 }
 
-section:nth-child(odd) {
-  background-color: #ddd;
+div.success {
+  border-radius: 10px;
+  background-color:#99FF99;
 }
 
-p, h2 {
-  margin: 23px 0;
+div.linkdiv {
+  height: 20px;
+}
+
+div.loginError {
+  position:absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  border-radius: 10px;
+  height: 20px;
+  color:brown;
 }
 
 h2 {
@@ -47,46 +63,72 @@ h2 {
   font-size: 20px;
 }
 
-form {
-  margin: 0 auto;
-  padding: 0 0 40px;
-  max-width: 650px;
+.hide {
+  display: none;
 }
 
-label p {
-  margin: 6px 0 23px;
-}
-
-p + p {
-  margin-top: 15px;
-}
-
-form {
-  text-align: left;
+form.signup {
+  width: 200px;
+  margin:auto;
+  background-color: #FFF;
 }
 
 label {
   display: block;
 }
 
-input[type="number"] {
+input.signup {
+  margin:auto;
+  margin-bottom: 10px;
+  height:40px;
+  width:200px;
+  font-size:24px;
+  font-family:'Fjalla One',sans-serif;
+  border-radius: 10px;;
+}
+
+button.signup {
+  font-size: 18px;
+  font-family:'Fjalla One',sans-serif;
+  outline:none;
+  background:#9FE6FD;
+
+  border-radius: 10px;
+  border:none;
+  width:105px;
+  height:40px;
+  margin: auto;
+  margin-top:20px;
+  border-radius: 10px;
+}
+
+.loadwidget {
   width: 50px;
+  height: 50px;
+  margin-top: 30px;
 }
 
-.form-section {
-  margin-bottom: 30px;
-}
+@media all and (min-width: 1000px) {
 
-.button-section {
-  padding: 0 0 0 15px;
-}
+  .container {
+    flex-direction: row;
+  }
 
-.overview-section input,
-.overview-section textarea {
-  width: 100%;
+  input.signup {
+    height:22px;
+    font-size:20px;
+    width:400px;
+  }
+
+  form.signup {
+    width:400px;
+  }
+
+  button.signup {
+    font-size: 20px;
+    width:90px;
+    height:36px;
+  }
+
 }
-.login-signup-section label {
-  display: inline;
-}
-  
   

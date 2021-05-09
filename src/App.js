@@ -9,21 +9,38 @@ import NewQuestion from './NewQuestion/NewQuestion';
 import Personal from './Personal/Personal';
 import AquaticContext from './AquaticContext';
 import { v4 as uuid } from 'uuid';
+import TokenService from './services/token-service';
 
+import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results : [],
-      reviews: [],
-      users:[
+      results : [
         {
-          user: 'admin',
-          pw:'admin'
-        }
+        "question_id": "0c0f3741-32e3-4400-8649-fecbf60f9688",
+        "title": "PATCH frogs in tank?",
+        "contents": "PATCH will they thrive",
+        "user_id": 3,
+        "username": "Squirtle"
+    }
+  ],
+      answers: [
+        {
+          "answer_id": "f2410602-056a-451e-8329-4e86b1ef77d4",
+          "question_id": "513d8e7a-34b5-43e8-91cb-891a34e59d0a",
+          "title": "PATCH new answer water temp",
+          "contents": "PATCH try these temps",
+          "user_id": "3",
+          "username": "Squirtle"
+      }
       ],
-      loggedIn: false
+      currentUser: '',
+      currentUsername: '',
+      loggedIn: false,
+      term: ''
+
 
     }
   }
@@ -34,15 +51,212 @@ class App extends Component {
     })
   }
 
+  updateTerm = (value) => {
+    this.setState({term: value});
+  }
+
+  paramFormat(params) {
+    const queryItems = Object.keys(params)
+      .map(key => `${key}=${params[key]}`)
+    return queryItems.join('&');
+  }
+
+  populateAnswers = (answers) => {
+    this.setState({
+      answers: answers 
+    })
+  }
+
+  getAnswers = (question_id) => {
+    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        throw new Error(res.status)
+      })
+      .then(resJson =>
+        
+        this.populateAnswers(resJson)
+        
+        )
+      .catch(error => console.log({ error }))
+  }
+
+  addAnswer = (e, question_id, title, desc) => {    
+    e.preventDefault();
+
+    let newId = uuid();
+    let cUser = this.state.currentUsername ? this.state.currentUsername : localStorage.getItem('currentUsername');
+
+    console.log(`cUser:  ${cUser} type: ${typeof cUser}`)
+
+    let newOne = {
+      answer_id: newId,
+      question_id: question_id,
+      title: title,
+      contents: desc,
+      user_id: this.state.currentUser,
+      username: cUser
+
+    }
+
+    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify(newOne)
+    })
+        .then(res => {
+            if (res.ok) {
+            return res.json()
+            }
+            throw new Error(res.status)
+        })
+        .then(data => {
+          this.getAnswers(question_id);
+
+        })
+        .catch(error => {
+            console.error(error)
+        })
+  }
+
+  patchAnswer = (e, answer) => {    
+    e.preventDefault();
+
+    fetch(`${API_BASE_URL}/answers/${answer.answer_id}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify(answer)
+    })
+        .then(data => {
+          this.getAnswers(answer.question_id)
+        }
+        )
+        .catch(error => {
+            console.error(error)
+        })
+  }
+
+  deleteAnswer = (e, answer_id, question_id) => {
+    e.preventDefault();
+    fetch(`${API_BASE_URL}/answers/${answer_id}`, {
+        method: 'DELETE',
+        headers: {
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        }
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.status)
+            }
+        })
+        .then(data => {
+          this.getAnswers(question_id);
+            
+        })
+        .catch(error => {
+          console.error(error)
+        })
+  }
+  updateCurrentUser = (username) => {
+    fetch(`${API_BASE_URL}/users/${username}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res => {
+      
+      if (res.ok) {
+        return res.json()
+      }
+      throw new Error(res.status)
+      
+    })
+    .then(resJson => {
+      console.log(`username response: ${resJson.id}`);
+      this.setState({currentUser: resJson.id, currentUsername: username})
+      localStorage.setItem('currentUsername',username);
+      localStorage.setItem('currentUser', resJson.id);
+    })
+    .catch(error => console.log({ error, updateCurrentUser:'yes' }))
+    
+  }
+
+  searchHandler = e => {
+    e.preventDefault();
+    console.log('searchHandler');
+    let termsArr = this.state.term.split(' ');
+    termsArr = termsArr.join(',');
+    let params = {
+        q: termsArr,
+        printType: 'all',
+        key: this.state.apiKey
+      };
+
+    let prettyParams = this.paramFormat(params);
+    const url = `${this.state.searchURL_TM}?${prettyParams}`;
+    console.log(url);
+
+    fetch(url)
+    .then(response => {
+        if (response.ok) {
+            
+            return response.json();
+        } else {
+            throw new Error(response.statusText);
+        }
+    })
+    .then(responseJson => this.updateResults(responseJson))
+    .catch(error => {this.setState({results: ''})});
+  }
+
+  updateResults = (responseJson) => {
+    let out = responseJson.items.slice(0,10);
+    let out2 = out.map(item => (
+      {title:item.volumeInfo.title,
+        author: item.volumeInfo.authors,
+        description: item.volumeInfo.description,
+        src:item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.smallThumbnail : 'https://images.dog.ceo/breeds/mix/Masala.jpg',
+        details:item.volumeInfo.publisher,
+        detailsDisplayed: 'no',
+        identifier:item.volumeInfo.industryIdentifiers[0]['identifier']
+      }
+    ))
+    this.setState({results: out2})
+    console.log(this.state.results)
+  }
+
+
 
   render() {
     const contextValue = {
       results: this.state.results,
-      reviews: this.state.reviews,
-      users: this.state.users,
+      answers: this.state.answers,
+      users: this.state.users, 
       currentUser: this.state.currentUser,
+      currentUsername: this.state.currentUsername,
+
       loggedIn: this.state.loggedIn,
-      setLogged: this.setLogged
+      setLogged: this.setLogged,
+      updateTerm: this.updateTerm,
+      searchHandler: this.searchHandler,
+      addAnswer: this.addAnswer,
+      updateCurrentUser: this.updateCurrentUser,
+      getAnswers: this.getAnswers,
+      patchAnswer: this.patchAnswer,
+      deleteAnswer: this.deleteAnswer
+
     };
 
   return (
@@ -85,7 +299,7 @@ class App extends Component {
         />
 
         <Route 
-          path='/question/:questId'
+          path='/question/:question_id'
           component={Question}
         />
 

@@ -1,41 +1,118 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import AquaticContext from '../AquaticContext';
+import TokenService from '../services/token-service'
+import AuthApiService from '../services/auth-api-service'
+import { Link } from 'react-router-dom';
+import Loading from './4V0b.gif';
 
+class LoginInput extends React.Component {
 
-import './Login.css';
-
-class Login extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            pw1: '',
+            error: null,
+            showLoading: 'hide'
+        }
+    }
     static contextType = AquaticContext;
 
+    usernameUpdate(val) {
+        this.setState({username:val});
+    }
 
+    pw1Update(val) {
+        this.setState({pw1:val});
+    }
+
+    handleSubmitJwtAuth = (e, user, pw) => {
+        e.preventDefault()
+        this.setState({
+            error: null,
+            showLoading: 'show'
+            })
+    
+        AuthApiService.postLogin({
+          user_name: user,
+          password: pw
+        })
+          .then(res => {
+            this.setState({ username: '', pw1:'' })
+
+            TokenService.saveAuthToken(res.authToken)
+            this.context.updateCurrentUser(user);
+            this.props.historyProp.push('/search');
+
+        })
+          .catch(res => {
+            this.setState({ 
+                error: res.error,
+                showLoading: 'hide'
+             })
+        })
+    }
+    
     render() {
+
+            let errorMessage = <p>{this.state.error}</p>;
+
+            let pwSection = (
+                <>
+                    <label htmlFor="pw1">Password</label>
+                    <input className="signup" type="password" name="pw1" id="pw1" onChange={e => this.pw1Update(e.target.value)}/>
+                </>
+            );
+            let buttonSection = (
+                <button className="signup" type="submit" >
+                    Submit
+                </button>
+            );
+
         return (
-            <div className="look">
-                <nav role="navigation"></nav>
-                <main role="main">
-                    <header>
-                        <h1>Log In!</h1>
-                    </header>
-                        <form>
+                <div className="login-page look">
+                    <div className="top-bar"></div>
+                    <main role="main">
+                        <header>
+                            <h1>Login to Aquatic Answers!</h1>
+                        </header>
 
-                        <section class="form-section overview-section">
-                            <label htmlFor="username">Username</label>
-                            <input type="text" name="username" placeholder="fishguy411" required />
+                        <form onSubmit={(e) => this.handleSubmitJwtAuth(e, this.state.username, this.state.pw1)}>
+                            <section className="overview-section">
+                                <label htmlFor="username">Username</label>
+                                <input className="signup" type="text" name="username" required onChange={e => this.usernameUpdate(e.target.value)}/>
 
-                            <label htmlFor="pw">Password</label>
-                            <input type="text" name="pw" id="hours-slept" />
+                                {pwSection}
+                            </section>
+                            <section className="login-signup-section">
+                                <div className="loginError">
+                                    {errorMessage}
+                                </div>
+                                <div className="linkdiv">
+                                </div>
 
+                                <h3>
+                                    Need an account? &nbsp;  
+                                    <Link to='/signup'>
+                                        Sign up
+                                    </Link>
+                                </h3>
 
-                            <Link to='/search'><button type="submit" onClick={e => this.context.setLogged(true)}>Submit</button></Link>
-                        </section>
+                                </section>
 
+                                <section className="button-section">
+                                    {buttonSection}
+                                    
+                                </section>
+                                <div className={this.state.showLoading}>
+                                    <img src={Loading} className="loadwidget" />
+                                </div>
                         </form>
-                        <Link to='/signup'><p>Need an account? Sign up here</p></Link>
-                </main>
-            </div>
+                    </main>
+                </div>
+
         );
     }
 }
 
-export default Login;
+export default LoginInput;

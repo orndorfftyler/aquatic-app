@@ -1,7 +1,11 @@
 import React from 'react';
 import AquaticContext from '../AquaticContext';
-import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
+import TokenService from '../services/token-service';
+import './Answer.css';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
 class Answer extends React.Component {
 
@@ -11,94 +15,97 @@ class Answer extends React.Component {
         super(props);
         this.state = {
             edit: false,
-            title: '',
-            content: ''
+            title: this.props.title,
+            contents: this.props.contents,
         }
     }
 
     editOn(e) {
         e.preventDefault();
         this.setState({edit:true});
-        
     }
 
     editOff() {
         this.setState({edit:false});
     }
 
-    editReviewHideInput(e, reviewId, title, content) {
+    editAnswerHideInput(e) {
         e.preventDefault();
         this.setState({edit:false});
 
-        this.context.editReview(e, reviewId, title, content);
+        this.context.patchAnswer(e, 
+            {
+                answer_id: this.props.answer_id,
+                question_id: this.props.question_id,
+                title: this.state.title,
+                contents: this.state.contents,
+                user_id: this.props.user_id,
+                username: this.props.username
+            }
+        );
     }
 
     updateContent(content) {
-        this.setState({content: content});
+        this.setState({contents: content});
     }
 
     updateTitle(title) {
         this.setState({title: title});
     }
 
+    componentDidMount() {
+    }
+
     render() {
 
+
         let resultContents = (
-            <div className="result">
+            <div className="answer">
                 <h2>{this.props.title}</h2>
-                <div>
                     <div>
                         <p>{this.props.contents}</p>
-                        <p>{this.props.helpCount} people found this helpful</p>
-                        <button type="submit" onClick={(e) => this.context.helpCountIncrease(e, this.props.reviewId)}>This review was helpful </button>
+                        <p>Author: {this.props.username}</p>
                     </div>
-                </div>
             </div>
-
         );
 
-        if (this.context.currentUser == this.props.user) {
+        if (this.context.currentUser == this.props.user_id || localStorage.getItem('currentUser') == this.props.user_id) {
             resultContents = (
-                <div className="result">
+                <div className="answer">
                     <h2>{this.props.title}</h2>
-                    <div>
                         <div>
                             <p>{this.props.contents}</p>
-                            <p>{this.props.helpCount} people found this helpful</p>
-                            <button type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
+                            <p>Author: {this.props.username}</p>
+                            <button  className="edit" type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
+                            <button  className="edit" type="submit" onClick={(e) => this.context.deleteAnswer(e, this.props.answer_id, this.props.question_id)}>Delete</button>
                         </div>
-                    </div>
                 </div>
             );
-
         }
 
         if (this.state.edit == true) {
             resultContents = (
-                <form onSubmit={(e) => this.editReviewHideInput(e, this.props.reviewId, this.state.title, this.state.content)}>
-                    <section className="form-section overview-section">
+                <form className="edit" onSubmit={(e) => this.editAnswerHideInput(e)}>
+                    <section>
                         <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
-                        <input onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.props.title} required />
+                        <input className="edit" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
 
-                        <label htmlFor="content">Review:</label>
-                        <textarea type="text" name="content" placeholder="Write your review here" defaultValue={this.props.contents} required onChange={e => this.updateContent(e.target.value)}>
+                        <label htmlFor="content">Answer:</label>
+                        <textarea className="edit" onChange={e => this.updateContent(e.target.value)} type="text" name="content" placeholder="Write your answer here" defaultValue={this.state.contents} required >
                         
                         </textarea>
-
-                        <button  type="submit">Submit</button>
-                        <button  type="button" onClick={() => this.editOff()}>Cancel</button>
+                        <div>
+                            <button  className="edit" type="submit">Submit</button>
+                            <button  className="edit" type="button" onClick={() => this.editOff()}>Cancel</button>
+                        </div>
                     </section>
                 </form>
             );
         }
-        
 
         return (
             <>
-            {/*<p>{this.state.edit.toString()}</p>
-            <p>User:{this.context.currentUser}</p>
-            <p>Review author user:{this.props.user}</p>*/}
             {resultContents}
             </>
         )

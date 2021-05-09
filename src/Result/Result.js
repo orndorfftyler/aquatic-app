@@ -2,27 +2,30 @@ import React from 'react';
 import AquaticContext from '../AquaticContext';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router-dom'
+import './Result.css';
 
 class Result extends React.Component {
 
     static contextType = AquaticContext;
     constructor(props) {
         super(props);
+        
         this.state = {
-            desc: this.props.description ? this.props.description.slice(0,100) : '',
+            contents: this.props.contents ? this.props.contents.split(' ').slice(0,50).join(' ') : '',
             buttonLabel:'More'
         }
+        
     }
 
     showHideDesc() {
-        if (this.state.desc && this.state.desc.length <= 100) {
+        if (this.state.contents && this.state.contents.split(' ').length <= 50) {
             this.setState({
-                desc:this.props.description,
+                contents:this.props.contents,
                 buttonLabel: 'Less'
             })
-        } else if (this.state.desc && this.state.desc.length > 100) {
+        } else if (this.state.contents && this.state.contents.split(' ').length > 50) {
             this.setState({
-                desc:this.props.description.slice(0,100),
+                contents:this.props.contents.split(' ').slice(0,50).join(' '),
                 buttonLabel: 'More'
             })
         }
@@ -31,45 +34,40 @@ class Result extends React.Component {
     render() {
 
         let buttonVersion = '';
-        if (this.props.description) {
+        if (this.props.contents && this.props.contents.split(' ').length > 50) {
             buttonVersion = (
-                <button type="button" onClick={() => this.showHideDesc()}>{this.state.buttonLabel}</button>
+                <button className="showHide" type="button" onClick={() => this.showHideDesc()}>{this.state.buttonLabel}</button>
             );
         } 
 
+        let descText = this.state.contents;
+        if (this.props.contents && this.props.contents.split(' ').length > 50 && this.state.contents.split(' ').length <= 50) {
+            descText = this.state.contents + '...'
+        } 
+
         let resultVersion = (
-            <div className="result">
-            <Link to={`book/${this.props.id}`}><h2>{this.props.title}</h2></Link>
-                <div>
-                    <Link to={`book/${this.props.id}`}>
-                        <img src={this.props.src} width="200" />
-                    </Link>
-                    <div>
-                        <p>Author: {this.props.author}</p>
-                        <p>Publisher: {this.props.details}</p>
-                        {this.state.desc}
-                        {/*<p onClick={() => this.context.detailsHandler(this.props.title)}>Show/Hide Details (click me)</p> */}
+            <section className="result">
+                <Link onClick={() => this.context.getAnswers(this.props.question_id)} to={`question/${this.props.question_id}`}><h2>{this.props.title}</h2></Link>
+                    <div className="desc">
+                        <p>{descText}</p>
+                        <p>Author: {this.props.username}</p>
+
                         {buttonVersion}
                     </div>
-                </div>
-            </div>
+            </section>
             
         );
         if (this.props.linkify == false) {
             resultVersion = (
-            <div className="result">
-            <h2>{this.props.title}</h2>
-                <div>
-                        <img src={this.props.src} width="200" />
-                    <div>
-                        <p >Author: {this.props.author}</p>
-                        <p>Publisher: {this.props.details}</p>
-                        {this.state.desc}
-                        {/*<p onClick={() => this.context.detailsHandler(this.props.title)}>Show/Hide Details (click me)</p> */}
+            <section className="result">
+                <h2>{this.props.title}</h2>
+                    <div className="desc">
+                        <p>{this.props.contents}</p>
+                        <p>Author: {this.props.username}</p>
+
                         {buttonVersion}
                     </div>
-                </div>
-            </div>
+            </section>
             )
         }
     

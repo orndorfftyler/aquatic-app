@@ -1,34 +1,17 @@
-.hide {
-  display: none;
-}
-
-.look {
-  font-family: "Open Sans",
-  sans-serif;
-  font-size: 20px;
-  color: #444;
-  text-align: center;
-  line-height: 1.5;
-  min-width: 320px;
-}
-
-.question-page {
-  font-family: "Open Sans",
-  sans-serif;
-  font-size: 20px;
-  color: #444;
-  text-align: center;
-  line-height: 1.5;
-  min-width: 320px;
+.answer {
+  width:300px;
+  background: #9FE6FD;
+  border-radius: 30px;
+  margin:auto;
+  margin: 10px 0;
 
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
 }
 
-input.question {
+input.edit {
   width: 200px;
   margin-bottom: 10px;
   height:40px;
@@ -37,7 +20,7 @@ input.question {
   border-radius: 10px;
 }
 
-textarea.question {
+textarea.edit {
   width: 200px;
   margin-bottom: 10px;
   font-size:14px;
@@ -46,19 +29,14 @@ textarea.question {
   height:200px;
 }
 
-form.question {
+form.edit {
   width: 300px;
   margin:auto;
   background: #9FE6FD;
   border-radius: 30px;
-
 }
 
-h3.prompt {
-  padding-top:20px;
-}
-
-button.question {
+button.edit {
   font-size: 18px;
   font-family:'Fjalla One',sans-serif;
   outline:none;
@@ -68,39 +46,52 @@ button.question {
   border:none;
   width:105px;
   height:40px;
-  margin: auto;
-  margin-top:20px;
-  margin-bottom:10px;
-
+  margin:10px;
   border-radius: 10px;
 }
 
-@media all and (min-width: 1000px) {
 
-  input.question {
+p.answerList {
+  font-size: 30px;
+  font-family:'Fjalla One',sans-serif;
+
+  text-align: center;
+  margin: auto;
+}
+
+
+@media all and (min-width: 1000px) {
+    
+  .answer {
+      width:60%;
+  }
+
+  input.edit {
     width: 400px;
     height:28px;
   }
 
-  textarea.question {
+  textarea.edit {
     width: 400px;
     font-size:20px;
 
   }
 
-  form.question {
+  form.edit {
     width:60%;
   }
 
-  div.question {
-    width: 100%;
-  }
-
-  button.question {
+  button.edit {
     font-size: 20px;
 
     width:90px;
     height:36px;
+  }
+
+  p.answerList {
+    text-align: left;
+    margin: auto;
+    margin-left:30%;
   }
 
 }

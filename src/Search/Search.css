@@ -1,98 +1,102 @@
-* {
-    box-sizing: border-box;
+header.search {
+  margin-top: 80px;
+  padding: 45px 15px;
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.search-page {
+  font-family: "Open Sans",
+  sans-serif;
+  font-size: 20px;
+  color: #444;
+  text-align: center;
+  line-height: 1.5;
+  min-width: 320px;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+}
+
+input.search {
+  width: 200px;
+  margin-bottom: 10px;
+  height:40px;
+  font-size:24px;
+  font-family:'Fjalla One',sans-serif;
+  border-radius: 10px;;
+}
+
+.searchlabel {
+  font-size:28px;
+  margin-bottom: 20px;
+
+}
+
+button.search, button.showHide {
+  font-size: 18px;
+  font-family:'Fjalla One',sans-serif;
+  outline:none;
+  background:#9FE6FD;
+
+  border-radius: 10px;
+  border:none;
+  width:105px;
+  height:40px;
+  margin: auto;
+  margin-top:20px;
+  margin-bottom:10px;
+  border-radius: 10px;
+}
+
+button.showHide { 
+  background:#FFF;
+}
+
+button.search {
+  background-color: #9FE6FD;
+}
+
+form.wrapper {
+  display: flex;
+  flex-direction:column;
+}
+
+div.spacer {
+  height:98px;
+}
+
+@media all and (min-width: 1000px) {
+
+  input.search {
+      width: 400px;
+      height:28px;
   }
-  
-  .result {
-    border: 5px solid black;
-    margin: 10px 0;
+
+  .searchlabel {
+    font-size:20px;
   }
-  
-  .look {
-    font-family: "Open Sans",
-    sans-serif;
+
+  button.search, button.showHide {
     font-size: 20px;
-    color: #444;
-    text-align: center;
-    line-height: 1.5;
-    min-width: 320px;
+    width:90px;
+    height:36px;
   }
   
-  nav,
-  footer {
-    padding: 1% 0;
-    background-color: #aaa;
-  }
-  
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
-  
-  header {
-    padding: 45px 15px;
-  }
-  
-  section {
-    padding: 30px 15px 0;
-    background-color: #ffffff;
-  
-  }
-  
-  section:nth-child(even) {
-    background-color: #ddd;
-  }
-  
-  p, h2 {
-    margin: 23px 0;
-  }
-  
-  h2 {
+  h1 {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 30px;
   }
-  
-  form {
-    margin: 0 auto;
-    padding: 0 0 40px;
-    max-width: 650px;
-  }
-  
-  label p {
-    margin: 6px 0 23px;
-  }
-  
-  p + p {
-    margin-top: 15px;
-  }
-  
-  form {
-    text-align: left;
-  }
-  
-  label {
-    display: block;
-  }
-  
-  input[type="number"] {
-    width: 50px;
-  }
-  
-  .form-section {
-    margin-bottom: 30px;
-  }
-  
-  .button-section {
-    padding: 0 0 0 15px;
-  }
-  
-  .overview-section input,
-  .overview-section textarea {
-    width: 100%;
-  }
-  .login-signup-section label {
-    display: inline;
-  }
-  
+      
+}
