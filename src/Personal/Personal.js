@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import AquaticContext from '../AquaticContext';
 import Navbar from '../Navbar/Navbar';
 import ResultList from '../ResultList/ResultList';
-import MyQuestionList from '../MyQuestionList/MyQuestionList';
 
 
 import './Personal.css';
@@ -15,7 +14,6 @@ class Personal extends React.Component {
         this.context.clearResults()
 
         this.context.getPersonalQuestions(this.context.currentUser)
-        //call new fetch
     }
 
 
@@ -29,10 +27,10 @@ class Personal extends React.Component {
                     <header>
                         <h1>My Questions:</h1>
                     </header>
-
-                    <MyQuestionList 
-                        questions={this.context.results}
+                    <ResultList 
+                        results={this.context.results}
                     />
+
 
                 </main>
             </div>

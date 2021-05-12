@@ -18,6 +18,8 @@ class Question extends React.Component {
         }
     }
 
+
+    
     updateContent(content) {
         this.setState({content: content});
     }
@@ -33,6 +35,8 @@ class Question extends React.Component {
     componentDidMount = () => {
 
         window.scrollTo(0,0);
+        this.context.getOneQuestion(this.props.match.params.question_id)
+        // fetch one question /questions/:question_id this.props.match.params.question_id
 
     }
 
@@ -61,6 +65,15 @@ class Question extends React.Component {
                 }
             }
         }
+
+        if (this.context.currentUsername == current.username) {
+            answerUserCheck = 'question hide';
+        }
+
+        if (!this.context.currentUsername) {
+            answerUserCheck = 'question hide';
+        }
+        
         
         return (
             

@@ -11,7 +11,7 @@ import AquaticContext from './AquaticContext';
 import { v4 as uuid } from 'uuid';
 import TokenService from './services/token-service';
 import PublicOnlyRoute from './Utils/PublicOnlyRoute';
-
+import PrivateRoute from './Utils/PrivateRoute';
 
 import './App.css';
 
@@ -44,7 +44,8 @@ class App extends Component {
       currentUser: '',
       currentUsername: '',
       loggedIn: false,
-      term: ''
+      term: '',
+      currentQuestion: ''
 
 
     }
@@ -70,11 +71,11 @@ class App extends Component {
   }
 
   getAnswers = (question_id) => {
-    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`, {
+    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`/*, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
-    })
+    }*/)
       .then(res => {
         if (res.ok) {
           return res.json()
@@ -109,7 +110,7 @@ class App extends Component {
 
 console.log(newOne)
 
-    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`, {
+    fetch(`${API_BASE_URL}/answers/${newOne.answer_id}`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -241,6 +242,8 @@ console.log(newOne)
   }
 */
 
+//----------------------------------------- question related fetches
+
   updateTerm = (value) => {
     this.setState({term: value});
   }
@@ -254,11 +257,11 @@ console.log(newOne)
     for (let i = 0; i < termsArr.length; i++) {
     
       if (this.state.results.length < 10 ) {
-        fetch(`${API_BASE_URL}/questionsearch/${termsArr[i]}`, {
+        fetch(`${API_BASE_URL}/questionsearch/${termsArr[i]}`/*, {
           headers: {
             'authorization': `bearer ${TokenService.getAuthToken()}`,
           },
-        })
+        }*/)
           .then(res => {
             if (res.ok) {
               return res.json()
@@ -325,7 +328,7 @@ console.log(newOne)
         body: JSON.stringify(question)
     })
         .then(data => {
-          this.getPersonalQuestions(this.state.currentUser)
+          this.getOneQuestion(question.question_id)
         }
         )
         .catch(error => {
@@ -347,7 +350,8 @@ console.log(newOne)
             }
         })
         .then(data => {
-          this.getPersonalQuestions(this.state.currentUser);
+          //this.setState({})
+          //this.getPersonalQuestions(this.state.currentUser);
             
         })
         .catch(error => {
@@ -355,6 +359,37 @@ console.log(newOne)
         })
   }
 
+  getOneQuestion = (question_id) => {
+    fetch(`${API_BASE_URL}/questions/${question_id}`/*, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    }*/)
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        throw new Error(res.status)
+      })
+      .then(resJson =>
+        //this.populateAnswers(resJson)
+        {let temp = [resJson];
+        this.setState({results: temp})
+        }
+        )
+      .catch(error => console.log({ error }))
+  }
+
+  clearUserAndUsername = () => {
+    this.setState({
+      results: [],
+      currentUser:'', 
+      currentUsername: ''});
+    localStorage.setItem('currentUsername','');
+    localStorage.setItem('currentUser', '');
+
+
+  }
 
   render() {
     const contextValue = {
@@ -379,7 +414,10 @@ console.log(newOne)
       clearResults: this.clearResults,
       getPersonalQuestions: this.getPersonalQuestions,
       patchQuestion: this.patchQuestion,
-      deleteQuestion: this.deleteQuestion
+      deleteQuestion: this.deleteQuestion,
+      getOneQuestion: this.getOneQuestion,
+
+      clearUserAndUsername: this.clearUserAndUsername
 
     };
 
@@ -409,9 +447,10 @@ console.log(newOne)
           historyProp={this.props.history}
         />
 
-        <Route 
+        <PrivateRoute 
           path='/new'
           component={NewQuestion}
+          historyProp={this.props.history}
         />
 
         <Route 

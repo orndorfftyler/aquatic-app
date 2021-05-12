@@ -22,7 +22,10 @@ const AquaticContext = React.createContext({
   clearResults: () => {},
   getPersonalQuestions: () => {},
   patchQuestion: () => {},
-  deleteQuestion: () => {}
+  deleteQuestion: () => {},
+  getOneQuestion: () => {},
+
+  clearUserAndUsername: () => {}
 
 
 })

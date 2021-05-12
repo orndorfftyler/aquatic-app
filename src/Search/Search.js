@@ -22,7 +22,7 @@ class Search extends React.Component {
                     historyProp={this.props.history}
                 />
                 <header className="search">
-                    <h1>fish fish fish fish fish fish fish fish fish fish fish fish </h1>
+                    <h1>Aquatic Answers</h1>
                 </header>
 
                 <SearchBar />

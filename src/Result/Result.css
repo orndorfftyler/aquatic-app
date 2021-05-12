@@ -22,8 +22,30 @@ img {
   flex-direction: column;
 }
 
+div.edit {
+  font-size: 18px;
+  font-family:'Fjalla One',sans-serif;
+  outline:none;
+  background:#FFF;
+
+  border:none;
+  width:105px;
+  height:40px;
+  margin:10px;
+  border-radius: 10px;
+
+}
+
 @media all and (min-width: 1000px) {
     
+  div.edit {
+    font-size: 20px;
+
+    width:90px;
+    height:36px;
+
+  }
+
   .result {
     width:60%;
   }

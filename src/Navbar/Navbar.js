@@ -12,6 +12,7 @@ export default class Nav extends React.Component {
         this.context.setLogged(false)
         console.log('logged out')
         TokenService.clearAuthToken()
+        this.context.clearUserAndUsername()
     }
 
     render() {
@@ -22,7 +23,7 @@ export default class Nav extends React.Component {
         let buttons = (
             <nav className='Nav'>
                 <p>Current User: {displayUser}</p>
-                <div className="navLink"><Link to='/login' onClick={this.handleLogoutClick}>Log Out</Link></div>
+                <div className="navLink"><Link to='/search' onClick={this.handleLogoutClick}>Log Out</Link></div>
                 <div className="navLink"><Link to='/search'>Search</Link></div>
                 <div className="navLink big"><Link to='/new'>New Question</Link></div>
                 <div className="navLink big"><Link to='/personal'>My Questions</Link></div>
@@ -34,8 +35,7 @@ export default class Nav extends React.Component {
             buttons = (
                 <nav className='Nav'>
                     <p>Current User: {displayUser}</p>
-                    <div><Link to='/login'>Log In</Link></div>
-                    <Link to='/login' onClick={this.handleLogoutClick}>Log Out</Link>
+                    <div className="navLink"><Link to='/login'>Log In</Link></div>
                 </nav>
             );
         }
