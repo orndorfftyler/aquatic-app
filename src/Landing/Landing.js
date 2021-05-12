@@ -16,7 +16,7 @@ class Landing extends React.Component {
                         <h2>Your #1 source for knowledge about aquariums and their inhabitants!</h2>
                         <h3>You can search for questions and view answers without being logged in. </h3>
                         <h3>You must be logged in to post, edit, and delete questions and answers or view the My Questions page.</h3>
-                        <h3>The nav bar will have more options after logging in. </h3>
+                        <h3>The nav bar will have more options after logging in.</h3>
                         <h3>Login info: username: admin pw: admin </h3>
                         <h3>For a good example question, search for "jellyfish" and select the first result.</h3>
                         <Link to='/search'><button type="button">Let's Go!</button></Link>
