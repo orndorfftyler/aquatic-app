@@ -3,9 +3,11 @@ import AquaticContext from '../AquaticContext';
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import Loading from './4V0b.gif';
 
-class LoginInput extends React.Component {
+
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -42,7 +44,13 @@ class LoginInput extends React.Component {
 
             TokenService.saveAuthToken(res.authToken)
             this.context.updateCurrentUser(user);
+            //console.log(`updateCurrentUser(${user})`)
+
             this.props.historyProp.push('/search');
+            console.log(`this.props.historyProp: ${this.props.historyProp}`)
+
+            //window.history.push('/search')
+
 
         })
           .catch(res => {
@@ -96,6 +104,10 @@ class LoginInput extends React.Component {
                                     <Link to='/signup'>
                                         Sign up
                                     </Link>
+                                    <Link to='/search'>
+                                        Search
+                                    </Link>
+
                                 </h3>
 
                                 </section>
@@ -115,4 +127,4 @@ class LoginInput extends React.Component {
     }
 }
 
-export default LoginInput;
+export default Login;

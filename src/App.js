@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route} from 'react-router-dom';
-import Question from './Question/question';
+import Question from './Question/Question';
 import Landing from './Landing/Landing';
 import Search from './Search/Search';
 import Signup from './Signup/Signup';
@@ -10,8 +10,13 @@ import Personal from './Personal/Personal';
 import AquaticContext from './AquaticContext';
 import { v4 as uuid } from 'uuid';
 import TokenService from './services/token-service';
+import PublicOnlyRoute from './Utils/PublicOnlyRoute';
+
 
 import './App.css';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
 class App extends Component {
   constructor(props) {
@@ -51,9 +56,6 @@ class App extends Component {
     })
   }
 
-  updateTerm = (value) => {
-    this.setState({term: value});
-  }
 
   paramFormat(params) {
     const queryItems = Object.keys(params)
@@ -104,6 +106,8 @@ class App extends Component {
       username: cUser
 
     }
+
+console.log(newOne)
 
     fetch(`${API_BASE_URL}/answersperquestion/${question_id}`, {
         method: 'POST',
@@ -192,7 +196,7 @@ class App extends Component {
     .catch(error => console.log({ error, updateCurrentUser:'yes' }))
     
   }
-
+/*
   searchHandler = e => {
     e.preventDefault();
     console.log('searchHandler');
@@ -220,23 +224,136 @@ class App extends Component {
     .then(responseJson => this.updateResults(responseJson))
     .catch(error => {this.setState({results: ''})});
   }
-
+  */
+/*
   updateResults = (responseJson) => {
-    let out = responseJson.items.slice(0,10);
-    let out2 = out.map(item => (
-      {title:item.volumeInfo.title,
-        author: item.volumeInfo.authors,
-        description: item.volumeInfo.description,
-        src:item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.smallThumbnail : 'https://images.dog.ceo/breeds/mix/Masala.jpg',
-        details:item.volumeInfo.publisher,
-        detailsDisplayed: 'no',
-        identifier:item.volumeInfo.industryIdentifiers[0]['identifier']
+    //let out = responseJson.items.slice(0,10);
+    let out2 = responseJson.map(question => (
+      {question_id:question.question_id,
+        title: question.title,
+        contents: question.contents,
+        user_id:question.user_id,
+        username:question.username
       }
     ))
     this.setState({results: out2})
     console.log(this.state.results)
   }
+*/
 
+  updateTerm = (value) => {
+    this.setState({term: value});
+  }
+
+  getQuestions = (e) => {
+    e.preventDefault();
+    this.clearResults();
+    let termsArr = this.state.term.split(' ');
+    console.log(termsArr)
+    console.log('this.state.results.length ' + this.state.results.length)
+    for (let i = 0; i < termsArr.length; i++) {
+    
+      if (this.state.results.length < 10 ) {
+        fetch(`${API_BASE_URL}/questionsearch/${termsArr[i]}`, {
+          headers: {
+            'authorization': `bearer ${TokenService.getAuthToken()}`,
+          },
+        })
+          .then(res => {
+            if (res.ok) {
+              return res.json()
+            }
+            throw new Error(res.status)
+          })
+          .then(resJson =>
+            
+            this.buildResults(resJson)
+            
+            )
+          .catch(error => console.log({ error }))
+      }
+    }
+    console.log(this.state.results)
+  }
+
+  buildResults = (arr) => {
+    let out = this.state.results;
+    for (let i = 0; i < arr.length; i++) {
+      out.push(arr[i])
+    }
+    this.setState({results: out})
+  }
+
+  clearResults = () => {
+    this.setState({results: []})
+  }
+
+  getPersonalQuestions = (user_id) => {
+    //e.preventDefault();
+    this.clearResults();
+    
+    fetch(`${API_BASE_URL}/questionsperuser/${user_id}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json()
+        }
+        throw new Error(res.status)
+      })
+      .then(resJson =>
+        
+        this.buildResults(resJson)
+        
+        )
+      .catch(error => console.log({ error }))
+          
+    console.log(this.state.results)
+  }
+
+  patchQuestion = (e, question) => {    
+    e.preventDefault();
+
+    fetch(`${API_BASE_URL}/questions/${question.question_id}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify(question)
+    })
+        .then(data => {
+          this.getPersonalQuestions(this.state.currentUser)
+        }
+        )
+        .catch(error => {
+            console.error(error)
+        })
+  }
+
+  deleteQuestion = (e, question_id) => {
+    e.preventDefault();
+    fetch(`${API_BASE_URL}/questions/${question_id}`, {
+        method: 'DELETE',
+        headers: {
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        }
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.status)
+            }
+        })
+        .then(data => {
+          this.getPersonalQuestions(this.state.currentUser);
+            
+        })
+        .catch(error => {
+          console.error(error)
+        })
+  }
 
 
   render() {
@@ -246,16 +363,23 @@ class App extends Component {
       users: this.state.users, 
       currentUser: this.state.currentUser,
       currentUsername: this.state.currentUsername,
+      term: this.state.term,
 
       loggedIn: this.state.loggedIn,
       setLogged: this.setLogged,
       updateTerm: this.updateTerm,
-      searchHandler: this.searchHandler,
+      //searchHandler: this.searchHandler,
       addAnswer: this.addAnswer,
       updateCurrentUser: this.updateCurrentUser,
       getAnswers: this.getAnswers,
       patchAnswer: this.patchAnswer,
-      deleteAnswer: this.deleteAnswer
+      deleteAnswer: this.deleteAnswer,
+
+      getQuestions: this.getQuestions,
+      clearResults: this.clearResults,
+      getPersonalQuestions: this.getPersonalQuestions,
+      patchQuestion: this.patchQuestion,
+      deleteQuestion: this.deleteQuestion
 
     };
 
@@ -276,11 +400,13 @@ class App extends Component {
         <Route 
           path='/signup'
           component={Signup}
+          historyProp={this.props.history}
         />
 
-        <Route 
+        <PublicOnlyRoute 
           path='/login'
           component={Login}
+          historyProp={this.props.history}
         />
 
         <Route 

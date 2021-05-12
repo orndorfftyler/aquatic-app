@@ -12,6 +12,34 @@ nav {
     z-index: 10;
 }
 
+.navLink {
+    font-size: 18px;
+    font-family:'Fjalla One',sans-serif;
+    outline:none;
+    background:#FFF;
+    margin: 0 5px;
+  
+    border-radius: 10px;
+    border:none;
+    width:100px;
+    height:30px;
+    border-radius: 10px;
+}
+
+.big {
+    font-size: 18px;
+    font-family:'Fjalla One',sans-serif;
+    outline:none;
+    background:#FFF;
+  
+    border-radius: 10px;
+    border:none;
+    width:200px;
+    height:30px;
+    border-radius: 10px;
+}
+
+
 nav p {
     margin: 0 20px;
     font-weight: bold;

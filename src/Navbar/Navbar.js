@@ -7,44 +7,43 @@ import './Navbar.css';
 export default class Nav extends React.Component {
     static contextType = AquaticContext;
 
-    renderLogoutLink() {
-        return (
-        <div>
-            <Link onClick={this.handleLogoutClick} to='/' style={{ textDecoration: 'none' }}>
-                Logout
-            </Link>
-        </div>
-        )
-    }
-
-    renderLoginLink() {
-        return (
-        <div>
-            <Link to='/signup' style={{ textDecoration: 'none' }}>
-                Sign Up / Log In
-            </Link>
-        </div>
-        )
-    }
 
     handleLogoutClick = () => {
+        this.context.setLogged(false)
+        console.log('logged out')
         TokenService.clearAuthToken()
     }
 
     render() {
-        let displayUser = this.context.currentUsername 
-            || localStorage.getItem('currentUsername') 
-            || 'none';
+        let displayUser = this.context.currentUser 
+            ? this.context.currentUser 
+            : 'none';
+
+        let buttons = (
+            <nav className='Nav'>
+                <p>Current User: {displayUser}</p>
+                <div className="navLink"><Link to='/login' onClick={this.handleLogoutClick}>Log Out</Link></div>
+                <div className="navLink"><Link to='/search'>Search</Link></div>
+                <div className="navLink big"><Link to='/new'>New Question</Link></div>
+                <div className="navLink big"><Link to='/personal'>My Questions</Link></div>
+
+            </nav>
+        );
+
+        if (!TokenService.hasAuthToken()) {
+            buttons = (
+                <nav className='Nav'>
+                    <p>Current User: {displayUser}</p>
+                    <div><Link to='/login'>Log In</Link></div>
+                    <Link to='/login' onClick={this.handleLogoutClick}>Log Out</Link>
+                </nav>
+            );
+        }
             
         return (
-            <nav >
-                <p>Current User: {displayUser}</p>
-                <button className="nav">
-                {TokenService.hasAuthToken()
-                    ? this.renderLogoutLink()
-                    : this.renderLoginLink()}
-                </button>
-            </nav>
+            <>
+            {buttons}
+            </>
         );
     }
 }

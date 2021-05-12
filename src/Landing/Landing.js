@@ -18,6 +18,10 @@ class Landing extends React.Component {
                     </header>
 
                     <section>
+                    <Link to='/login'>
+                            log in 
+                        </Link>
+
                         <h3>Have a question about your aquatic pets?</h3>
                         <p>Get instant answers from experts in the community.</p>
                     </section>

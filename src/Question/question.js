@@ -82,7 +82,7 @@ class Question extends React.Component {
 
                 <div className={answerUserCheck}>
                     <div className={this.state.showHideAnswerInput}>
-                        <form className="question" onSubmit={(e) => this.showHideAnswer(e, current.identifier, this.state.title, this.state.content)}>
+                        <form className="question" onSubmit={(e) => this.showHideAnswer(e, current.question_id, this.state.title, this.state.content)}>
                             <section className="prompt">
                                 <h3 className="prompt">Do you know the answer?</h3>
                                 <label htmlFor="title">Title</label>

@@ -8,6 +8,13 @@ import './Search.css';
 class Search extends React.Component {
     static contextType = AquaticContext;
 
+    
+    componentDidMount = () => {
+        //this.context.clearResults()
+    }
+
+
+
     render() {
         return (
             <div className="search-page">

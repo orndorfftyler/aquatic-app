@@ -5,8 +5,10 @@ const AquaticContext = React.createContext({
   answers: [],
   users: [],
   currentUser: '',
-  currentUsernam: '',
+  currentUsername: '',
   loggedIn: false,
+  term: '',
+
   setLogged: () => {},
   updateTerm: () => {},
   searchHandler: () => {},
@@ -15,6 +17,13 @@ const AquaticContext = React.createContext({
   getAnswers: () => {},
   patchAnswer: () => {},
   deleteAnswer: () => {},
+
+  getQuestions: () => {},
+  clearResults: () => {},
+  getPersonalQuestions: () => {},
+  patchQuestion: () => {},
+  deleteQuestion: () => {}
+
 
 })
 

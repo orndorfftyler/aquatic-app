@@ -2,12 +2,13 @@ import React from 'react';
 import AquaticContext from '../AquaticContext';
 import {withRouter} from 'react-router-dom'
 import TokenService from '../services/token-service';
-import './Answer.css';
+import {Link} from 'react-router-dom';
+
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
-class Answer extends React.Component {
+class MyQuestion extends React.Component {
 
     static contextType = AquaticContext;
 
@@ -29,13 +30,12 @@ class Answer extends React.Component {
         this.setState({edit:false});
     }
 
-    editAnswerHideInput(e) {
+    editQuestionHideInput(e) {
         e.preventDefault();
         this.setState({edit:false});
 
-        this.context.patchAnswer(e, 
+        this.context.patchQuestion(e, // make this fetch in app
             {
-                answer_id: this.props.answer_id,
                 question_id: this.props.question_id,
                 title: this.state.title,
                 contents: this.state.contents,
@@ -59,9 +59,9 @@ class Answer extends React.Component {
     render() {
 
 
-        let answerContents = (
-            <div className="answer">
-                <h2>{this.props.title}</h2>
+        let questionContents = (
+            <div className="result">
+                <Link onClick={() => this.context.getAnswers(this.props.question_id)} to={`question/${this.props.question_id}`}><h2>{this.props.title}</h2></Link>
                     <div>
                         <p>{this.props.contents}</p>
                         <p>Author: {this.props.username}</p>
@@ -70,29 +70,29 @@ class Answer extends React.Component {
         );
 
         if (this.context.currentUser == this.props.user_id || localStorage.getItem('currentUser') == this.props.user_id) {
-            answerContents = (
-                <div className="answer">
-                    <h2>{this.props.title}</h2>
+            questionContents = (
+                <div className="result">
+                    <Link onClick={() => this.context.getAnswers(this.props.question_id)} to={`question/${this.props.question_id}`}><h2>{this.props.title}</h2></Link>
                         <div>
                             <p>{this.props.contents}</p>
                             <p>Author: {this.props.username}</p>
                             <button  className="edit" type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
-                            <button  className="edit" type="submit" onClick={(e) => this.context.deleteAnswer(e, this.props.answer_id, this.props.question_id)}>Delete</button>
+                            <button  className="edit" type="submit" onClick={(e) => this.context.deleteQuestion(e, this.props.question_id)}>Delete</button>
                         </div>
                 </div>
             );
         }
 
         if (this.state.edit == true) {
-            answerContents = (
-                <form className="edit" onSubmit={(e) => this.editAnswerHideInput(e)}>
+            questionContents = (
+                <form className="edit" onSubmit={(e) => this.editQuestionHideInput(e)}>
                     <section>
                         <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
                         <input className="edit" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
 
                         <label htmlFor="content">Answer:</label>
-                        <textarea className="edit" onChange={e => this.updateContent(e.target.value)} type="text" name="content" placeholder="Write your answer here" defaultValue={this.state.contents} required >
+                        <textarea className="edit" onChange={e => this.updateContent(e.target.value)} type="text" name="content" placeholder="Write your question here" defaultValue={this.state.contents} required >
                         
                         </textarea>
                         <div>
@@ -106,10 +106,10 @@ class Answer extends React.Component {
 
         return (
             <>
-            {answerContents}
+            {questionContents}
             </>
         )
     }
 }
 
-export default withRouter(Answer);
+export default withRouter(MyQuestion);
