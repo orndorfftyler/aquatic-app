@@ -34,7 +34,6 @@ input.question {
   height:40px;
   font-size:24px;
   font-family:'Fjalla One',sans-serif;
-  border-radius: 10px;
 }
 
 textarea.question {
@@ -42,7 +41,6 @@ textarea.question {
   margin-bottom: 10px;
   font-size:14px;
   font-family:'Fjalla One',sans-serif;
-  border-radius: 10px;;
   height:200px;
 }
 
@@ -50,7 +48,6 @@ form.question {
   width: 300px;
   margin:auto;
   background: #9FE6FD;
-  border-radius: 30px;
 
 }
 
@@ -64,7 +61,6 @@ button.question {
   outline:none;
   background:#FFF;
 
-  border-radius: 10px;
   border:none;
   width:105px;
   height:40px;
@@ -72,7 +68,6 @@ button.question {
   margin-top:20px;
   margin-bottom:10px;
 
-  border-radius: 10px;
 }
 
 @media all and (min-width: 1000px) {

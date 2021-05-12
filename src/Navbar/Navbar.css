@@ -19,11 +19,9 @@ nav {
     background:#FFF;
     margin: 0 5px;
   
-    border-radius: 10px;
     border:none;
     width:100px;
     height:30px;
-    border-radius: 10px;
 }
 
 .big {
@@ -32,11 +30,9 @@ nav {
     outline:none;
     background:#FFF;
   
-    border-radius: 10px;
     border:none;
     width:200px;
     height:30px;
-    border-radius: 10px;
 }
 
 
@@ -51,9 +47,7 @@ button.nav {
     outline:none;
     background:#FFF;
   
-    border-radius: 10px;
     border:none;
     width:100px;
     height:30px;
-    border-radius: 10px;
   }

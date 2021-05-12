@@ -1,7 +1,6 @@
 .result {
   width:300px;
-  background: #9FE6FD;
-  border-radius: 30px;
+  background: #acacac;
   margin:auto;
   margin: 10px 0;
 
@@ -32,7 +31,6 @@ div.edit {
   width:105px;
   height:40px;
   margin:10px;
-  border-radius: 10px;
 
 }
 

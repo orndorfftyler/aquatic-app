@@ -1,7 +1,6 @@
 .answer {
   width:300px;
   background: #9FE6FD;
-  border-radius: 30px;
   margin:auto;
   margin: 10px 0;
 
@@ -17,7 +16,6 @@ input.edit {
   height:40px;
   font-size:24px;
   font-family:'Fjalla One',sans-serif;
-  border-radius: 10px;
 }
 
 textarea.edit {
@@ -25,7 +23,6 @@ textarea.edit {
   margin-bottom: 10px;
   font-size:14px;
   font-family:'Fjalla One',sans-serif;
-  border-radius: 10px;;
   height:200px;
 }
 
@@ -33,7 +30,6 @@ form.edit {
   width: 300px;
   margin:auto;
   background: #9FE6FD;
-  border-radius: 30px;
 }
 
 button.edit {
@@ -46,7 +42,6 @@ button.edit {
   width:105px;
   height:40px;
   margin:10px;
-  border-radius: 10px;
 }
 
 

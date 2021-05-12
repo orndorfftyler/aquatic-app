@@ -22,25 +22,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results : [
-        {
-        "question_id": "0c0f3741-32e3-4400-8649-fecbf60f9688",
-        "title": "PATCH frogs in tank?",
-        "contents": "PATCH will they thrive",
-        "user_id": 3,
-        "username": "Squirtle"
-    }
-  ],
-      answers: [
-        {
-          "answer_id": "f2410602-056a-451e-8329-4e86b1ef77d4",
-          "question_id": "513d8e7a-34b5-43e8-91cb-891a34e59d0a",
-          "title": "PATCH new answer water temp",
-          "contents": "PATCH try these temps",
-          "user_id": "3",
-          "username": "Squirtle"
-      }
-      ],
+      results : [],
+      answers: [],
       currentUser: '',
       currentUsername: '',
       loggedIn: false,
@@ -197,50 +180,6 @@ console.log(newOne)
     .catch(error => console.log({ error, updateCurrentUser:'yes' }))
     
   }
-/*
-  searchHandler = e => {
-    e.preventDefault();
-    console.log('searchHandler');
-    let termsArr = this.state.term.split(' ');
-    termsArr = termsArr.join(',');
-    let params = {
-        q: termsArr,
-        printType: 'all',
-        key: this.state.apiKey
-      };
-
-    let prettyParams = this.paramFormat(params);
-    const url = `${this.state.searchURL_TM}?${prettyParams}`;
-    console.log(url);
-
-    fetch(url)
-    .then(response => {
-        if (response.ok) {
-            
-            return response.json();
-        } else {
-            throw new Error(response.statusText);
-        }
-    })
-    .then(responseJson => this.updateResults(responseJson))
-    .catch(error => {this.setState({results: ''})});
-  }
-  */
-/*
-  updateResults = (responseJson) => {
-    //let out = responseJson.items.slice(0,10);
-    let out2 = responseJson.map(question => (
-      {question_id:question.question_id,
-        title: question.title,
-        contents: question.contents,
-        user_id:question.user_id,
-        username:question.username
-      }
-    ))
-    this.setState({results: out2})
-    console.log(this.state.results)
-  }
-*/
 
 //----------------------------------------- question related fetches
 
@@ -403,7 +342,6 @@ console.log(newOne)
       loggedIn: this.state.loggedIn,
       setLogged: this.setLogged,
       updateTerm: this.updateTerm,
-      //searchHandler: this.searchHandler,
       addAnswer: this.addAnswer,
       updateCurrentUser: this.updateCurrentUser,
       getAnswers: this.getAnswers,

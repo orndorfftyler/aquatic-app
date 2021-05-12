@@ -11,7 +11,6 @@ const AquaticContext = React.createContext({
 
   setLogged: () => {},
   updateTerm: () => {},
-  searchHandler: () => {},
   addAnswer: () => {},
   updateCurrentUser: () => {},
   getAnswers: () => {},

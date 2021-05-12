@@ -35,7 +35,6 @@ input.search {
   height:40px;
   font-size:24px;
   font-family:'Fjalla One',sans-serif;
-  border-radius: 10px;;
 }
 
 .searchlabel {
@@ -48,16 +47,14 @@ button.search, button.showHide {
   font-size: 18px;
   font-family:'Fjalla One',sans-serif;
   outline:none;
-  background:#9FE6FD;
+  background:#acacac;
 
-  border-radius: 10px;
   border:none;
   width:105px;
   height:40px;
   margin: auto;
   margin-top:20px;
   margin-bottom:10px;
-  border-radius: 10px;
 }
 
 button.showHide { 
@@ -65,7 +62,7 @@ button.showHide {
 }
 
 button.search {
-  background-color: #9FE6FD;
+  background-color: #acacac;
 }
 
 form.wrapper {

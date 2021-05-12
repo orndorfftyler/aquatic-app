@@ -84,7 +84,6 @@ input.signup {
   width:200px;
   font-size:24px;
   font-family:'Fjalla One',sans-serif;
-  border-radius: 10px;;
 }
 
 button.signup {
@@ -93,13 +92,11 @@ button.signup {
   outline:none;
   background:#9FE6FD;
 
-  border-radius: 10px;
   border:none;
   width:105px;
   height:40px;
   margin: auto;
   margin-top:20px;
-  border-radius: 10px;
 }
 
 .loadwidget {
