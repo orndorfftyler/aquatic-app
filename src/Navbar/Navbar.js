@@ -16,8 +16,8 @@ export default class Nav extends React.Component {
     }
 
     render() {
-        let displayUser = this.context.currentUser 
-            ? this.context.currentUser 
+        let displayUser = this.context.currentUsername 
+            ? this.context.currentUsername 
             : 'none';
 
         let buttons = (
@@ -34,7 +34,6 @@ export default class Nav extends React.Component {
         if (!TokenService.hasAuthToken()) {
             buttons = (
                 <nav className='Nav'>
-                    <p>Current User: {displayUser}</p>
                     <div className="navLink"><Link to='/login'>Log In</Link></div>
                 </nav>
             );

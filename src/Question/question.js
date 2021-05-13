@@ -36,7 +36,6 @@ class Question extends React.Component {
 
         window.scrollTo(0,0);
         this.context.getOneQuestion(this.props.match.params.question_id)
-        // fetch one question /questions/:question_id this.props.match.params.question_id
 
     }
 
@@ -84,7 +83,7 @@ class Question extends React.Component {
                 />
 
                 <div className="spacer"></div>
-
+                <p className="answerList">Question:</p>
                 <Result 
                     title={current.title}
                     username={current.username}

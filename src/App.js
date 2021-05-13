@@ -23,6 +23,7 @@ class App extends Component {
     super(props);
     this.state = {
       results : [],
+      searchResults: [],
       answers: [],
       currentUser: '',
       currentUsername: '',
@@ -190,7 +191,11 @@ console.log(newOne)
   getQuestions = (e) => {
     e.preventDefault();
     this.clearResults();
-    let termsArr = this.state.term.split(' ');
+    let terms = this.state.term.toLowerCase();
+    console.log(`terms = ${terms}`)
+    let termsArr = terms.split(' ');
+    console.log(`termsArr = ${termsArr}`)
+
     console.log(termsArr)
     console.log('this.state.results.length ' + this.state.results.length)
     for (let i = 0; i < termsArr.length; i++) {
@@ -208,9 +213,10 @@ console.log(newOne)
             throw new Error(res.status)
           })
           .then(resJson =>
-            
+            {
             this.buildResults(resJson)
-            
+            this.updateSearchResults(resJson)
+            }
             )
           .catch(error => console.log({ error }))
       }
@@ -322,12 +328,26 @@ console.log(newOne)
   clearUserAndUsername = () => {
     this.setState({
       results: [],
+      searchResults: [],
       currentUser:'', 
       currentUsername: ''});
     localStorage.setItem('currentUsername','');
     localStorage.setItem('currentUser', '');
+  }
 
+  updateSearchResults = (sResults) => {
+    let out = this.state.searchResults;
+    for (let i = 0; i < sResults.length; i++) {
+      out.push(sResults[i])
+    }
+    this.setState({searchResults: out})
+  }
+  
 
+  setResults = (results) => {
+    this.setState({
+      results: results
+    })
   }
 
   render() {
@@ -340,6 +360,8 @@ console.log(newOne)
       term: this.state.term,
 
       loggedIn: this.state.loggedIn,
+      searchResults: this.state.searchResults,
+
       setLogged: this.setLogged,
       updateTerm: this.updateTerm,
       addAnswer: this.addAnswer,
@@ -355,7 +377,9 @@ console.log(newOne)
       deleteQuestion: this.deleteQuestion,
       getOneQuestion: this.getOneQuestion,
 
-      clearUserAndUsername: this.clearUserAndUsername
+      clearUserAndUsername: this.clearUserAndUsername,
+      updateSearchResults: this.updateSearchResults,
+      setResults: this.setResults
 
     };
 

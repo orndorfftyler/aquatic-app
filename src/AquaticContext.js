@@ -2,6 +2,7 @@ import React from 'react'
 
 const AquaticContext = React.createContext({
   results: [],
+  searchResults: [],
   answers: [],
   users: [],
   currentUser: '',
@@ -24,7 +25,9 @@ const AquaticContext = React.createContext({
   deleteQuestion: () => {},
   getOneQuestion: () => {},
 
-  clearUserAndUsername: () => {}
+  clearUserAndUsername: () => {},
+  updateSearchResults: () => {},
+  setResults: () => {}
 
 
 })

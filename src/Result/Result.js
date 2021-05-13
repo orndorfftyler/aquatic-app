@@ -70,9 +70,16 @@ class Result extends React.Component {
     }
 
     deleteProcessing(e, question_id) {
+        e.preventDefault()
         this.context.deleteQuestion(e, question_id)
         this.setState({justDeleted:true})
     }
+
+    storeResults(question_id) {
+        //this.context.updateSearchResults(this.context.results)
+        this.context.getAnswers(question_id)
+    }
+
 
 
     render() {
@@ -93,7 +100,7 @@ class Result extends React.Component {
 
         let resultVersion = (
             <section className="result">
-                <Link onClick={() => this.context.getAnswers(this.props.question_id)} to={`question/${this.props.question_id}`}><h2>{this.props.title}</h2></Link>
+                <Link onClick={() => this.storeResults(this.props.question_id)} to={`question/${this.props.question_id}`}><h2>{this.props.title}</h2></Link>
                     <div className="desc">
                         <p>{descText}</p>
                         {buttonVersion}
@@ -110,12 +117,24 @@ class Result extends React.Component {
                 <h2>{this.props.title}</h2>
                     <div className="desc">
                         <p>{this.props.contents}</p>
-                        {buttonVersion}
                         <p>Author: {this.props.username}</p>
 
                         
                     </div>
             </section>
+            )
+        }
+
+        let editDeleteButtons = (
+            <>
+                <button  className="edit" type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
+                <button  className="edit" type="submit" onClick={(e) => this.deleteProcessing(e, this.props.question_id)}>Delete</button>
+            </>
+        )
+
+        if (this.state.justDeleted == true) {
+            editDeleteButtons = (
+                ''
             )
         }
 
@@ -127,10 +146,8 @@ class Result extends React.Component {
                 <h2>{this.props.title}</h2>
                         <div className="desc">
                             <p>{this.props.contents}</p>
-                            {buttonVersion}
                             <p>Author: {this.props.username}</p>
-                            <button  className="edit" type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
-                            <div className="edit" ><Link to={`/personal`} onClick={(e) => this.deleteProcessing(e, this.props.question_id)}>Delete</Link></div>
+                            {editDeleteButtons}
                             {deleteNotice}
                         </div>
             </section>

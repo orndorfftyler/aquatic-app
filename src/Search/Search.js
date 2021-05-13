@@ -11,6 +11,11 @@ class Search extends React.Component {
     
     componentDidMount = () => {
         //this.context.clearResults()
+        if (this.context.searchResults.length > 0) (
+            this.context.setResults(this.context.searchResults)
+        )
+        console.log(`searchResult length: ${this.context.searchResults.length}`)
+
     }
 
 
