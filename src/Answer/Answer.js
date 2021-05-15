@@ -87,7 +87,6 @@ class Answer extends React.Component {
             answerContents = (
                 <form className="edit" onSubmit={(e) => this.editAnswerHideInput(e)}>
                     <section>
-                        <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
                         <input className="edit" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
 

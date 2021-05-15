@@ -1,6 +1,6 @@
 .result {
   width:300px;
-  background: #acacac;
+  background: #D7FFD8;
   margin:auto;
   margin: 10px 0;
 
@@ -23,7 +23,7 @@ img {
 
 div.edit {
   font-size: 18px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   outline:none;
   background:#FFF;
 

@@ -21,20 +21,25 @@ export default class Nav extends React.Component {
             : 'none';
 
         let buttons = (
-            <nav className='Nav'>
-                <p>Current User: {displayUser}</p>
-                <div className="navLink"><Link to='/search' onClick={this.handleLogoutClick}>Log Out</Link></div>
-                <div className="navLink"><Link to='/search'>Search</Link></div>
-                <div className="navLink big"><Link to='/new'>New Question</Link></div>
-                <div className="navLink big"><Link to='/personal'>My Questions</Link></div>
 
+            <nav className='Nav'>
+
+                    <p>Current User: {displayUser}</p>
+                <div className="flexRow">
+                    <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }} onClick={this.handleLogoutClick}>Log Out</Link></div>
+                    <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }}>Search</Link></div>
+                </div>
+                <div className="flexRow">
+                    <div className="navLink big"><Link to='/new' style={{ textDecoration: 'none' }}>New Question</Link></div>
+                    <div className="navLink big"><Link to='/personal' style={{ textDecoration: 'none' }}>My Questions</Link></div>
+                </div>
             </nav>
         );
 
         if (!TokenService.hasAuthToken()) {
             buttons = (
                 <nav className='Nav'>
-                    <div className="navLink"><Link to='/login'>Log In</Link></div>
+                    <div className="navLink"><Link to='/login' style={{ textDecoration: 'none' }}>Log In</Link></div>
                 </nav>
             );
         }

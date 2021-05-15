@@ -1,7 +1,8 @@
 header.search {
-  margin-top: 80px;
+  margin-top: 160px;
   padding: 45px 15px;
 }
+
 
 h2 {
   font-weight: 700;
@@ -14,10 +15,9 @@ h1 {
 }
 
 .search-page {
-  font-family: "Open Sans",
-  sans-serif;
+  font-family: 'Newsreader', serif;
   font-size: 20px;
-  color: #444;
+  color: #000;
   text-align: center;
   line-height: 1.5;
   min-width: 320px;
@@ -32,9 +32,9 @@ h1 {
 input.search {
   width: 200px;
   margin-bottom: 10px;
-  height:40px;
+  height:28px;
   font-size:24px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
 }
 
 .searchlabel {
@@ -45,9 +45,9 @@ input.search {
 
 button.search, button.showHide {
   font-size: 18px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   outline:none;
-  background:#acacac;
+  background:#D7FFD8;
 
   border:none;
   width:105px;
@@ -61,10 +61,6 @@ button.showHide {
   background:#FFF;
 }
 
-button.search {
-  background-color: #acacac;
-}
-
 form.wrapper {
   display: flex;
   flex-direction:column;
@@ -74,12 +70,33 @@ div.spacer {
   height:98px;
 }
 
+#question {
+  font-size:18px;
+}
+
+.search-space {
+  height:100px;
+}
+
 @media all and (min-width: 1000px) {
+
+
+  form.wrapper {
+    display:inline;
+  }
+  
 
   input.search {
       width: 400px;
-      height:28px;
+      height:40px;
   }
+
+  #question {
+    font-size:24px;
+    margin-right: 20px;
+
+  }
+  
 
   .searchlabel {
     font-size:20px;
@@ -92,8 +109,7 @@ div.spacer {
   }
   
   h1 {
-    font-weight: 700;
-    font-size: 30px;
+    font-size: 2em;
   }
       
 }

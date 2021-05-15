@@ -78,14 +78,14 @@ class Login extends React.Component {
             );
 
         return (
-                <div className="login-page look">
+                <div className="signup-page look">
                     <div className="top-bar"></div>
                     <main role="main">
                         <header>
                             <h1>Login to Aquatic Answers!</h1>
                         </header>
 
-                        <form onSubmit={(e) => this.handleSubmitJwtAuth(e, this.state.username, this.state.pw1)}>
+                        <form className="signup" onSubmit={(e) => this.handleSubmitJwtAuth(e, this.state.username, this.state.pw1)}>
                             <section className="overview-section">
                                 <label htmlFor="username">Username</label>
                                 <input className="signup" type="text" name="username" required onChange={e => this.usernameUpdate(e.target.value)}/>

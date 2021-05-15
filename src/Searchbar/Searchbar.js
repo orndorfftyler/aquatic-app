@@ -6,10 +6,9 @@ class Searchbar extends React.Component {
 
     render() {
     return (
-        <form className="wrapper">
-            <label className="searchlabel" htmlFor="question">Search:</label>
-            <input className="search" onChange={event => this.context.updateTerm(event.target.value)} name="question" type="text" id="question" required />
-            <button className="search" onClick={this.context.getQuestions}>Submit</button>
+        <form className="wrapper" >
+            <input className="search margin" onChange={event => this.context.updateTerm(event.target.value)} name="question" type="text" id="question" required />
+            <button className="search margin sb" onClick={this.context.getQuestions}>Submit</button>
         </form>
 
         );

@@ -19,20 +19,18 @@ class Personal extends React.Component {
 
     render() {
         return (
-            <div className="look">
+            <div className="search-page">
                 <Navbar 
                     historyProp={this.props.history}
                 />
-                <main role="main">
-                    <header>
+                    <header className="search">
                         <h1>My Questions:</h1>
                     </header>
                     <ResultList 
                         results={this.context.results}
                     />
 
-
-                </main>
+                <div className="search-space"></div>
             </div>
         );
     }

@@ -18,8 +18,6 @@ class Search extends React.Component {
 
     }
 
-
-
     render() {
         return (
             <div className="search-page">
@@ -34,6 +32,7 @@ class Search extends React.Component {
                 <ResultList 
                     results={this.context.results}
                 />
+                <div className="search-space"></div>
             </div>
         );
     }

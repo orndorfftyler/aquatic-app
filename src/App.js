@@ -336,11 +336,13 @@ console.log(newOne)
   }
 
   updateSearchResults = (sResults) => {
+    /*
     let out = this.state.searchResults;
     for (let i = 0; i < sResults.length; i++) {
       out.push(sResults[i])
     }
-    this.setState({searchResults: out})
+    */
+    this.setState({searchResults: sResults})
   }
   
 
@@ -386,10 +388,6 @@ console.log(newOne)
   return (
     <div className='App'>
       <AquaticContext.Provider value={contextValue}>
-      <header>
-          {/*<Nav />*/}
-          
-      </header>
 
       <main>
         <Route 

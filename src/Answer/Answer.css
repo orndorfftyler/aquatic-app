@@ -1,6 +1,6 @@
 .answer {
   width:300px;
-  background: #9FE6FD;
+  background: #D7FFD8;
   margin:auto;
   margin: 10px 0;
 
@@ -15,26 +15,26 @@ input.edit {
   margin-bottom: 10px;
   height:40px;
   font-size:24px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
 }
 
 textarea.edit {
   width: 200px;
   margin-bottom: 10px;
   font-size:14px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   height:200px;
 }
 
 form.edit {
   width: 300px;
   margin:auto;
-  background: #9FE6FD;
+  background: #D7FFD8;
 }
 
 button.edit {
   font-size: 18px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   outline:none;
   background:#FFF;
 
@@ -46,11 +46,15 @@ button.edit {
 
 
 p.answerList {
-  font-size: 30px;
-  font-family:'Fjalla One',sans-serif;
+  font-size: 22px;
+  font-family: 'Newsreader', serif;
 
   text-align: center;
   margin: auto;
+}
+
+.topSpace {
+  margin-top: 220px;
 }
 
 
@@ -86,6 +90,8 @@ p.answerList {
     text-align: left;
     margin: auto;
     margin-left:30%;
+    font-size: 30px;
+
   }
 
 }

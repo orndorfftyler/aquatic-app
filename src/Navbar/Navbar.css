@@ -1,10 +1,11 @@
+
 nav {
-    height: 8%;
+    height: 170px;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #5DB7E8;
+    background: #D7FFD8;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,42 +13,81 @@ nav {
     z-index: 10;
 }
 
+.flexRow {
+    display:flex;
+
+    flex-direction: row;
+ }
+
 .navLink {
-    font-size: 18px;
-    font-family:'Fjalla One',sans-serif;
+    font-size: 15px;
+    font-family: 'Newsreader', serif;
     outline:none;
     background:#FFF;
-    margin: 0 5px;
+    margin: 10px 10px;
   
     border:none;
-    width:100px;
-    height:30px;
+    width:70px;
+    height:25px;
 }
 
 .big {
-    font-size: 18px;
-    font-family:'Fjalla One',sans-serif;
-    outline:none;
-    background:#FFF;
-  
-    border:none;
-    width:200px;
-    height:30px;
+      
+    width:100px;
+}
+
+
+Link {
+    text-decoration: none;
 }
 
 
 nav p {
-    margin: 0 20px;
+    margin: 10px 20px;
     font-weight: bold;
 }
 
 button.nav {
     font-size: 18px;
-    font-family:'Fjalla One',sans-serif;
+    font-family: 'Newsreader', serif;
     outline:none;
     background:#FFF;
   
     border:none;
     width:100px;
     height:30px;
+  }
+
+  @media all and (min-width: 1000px) {
+
+    nav {
+        flex-direction: row;
+        height: 8vh;
+
+    }
+
+    .flexRow {
+        flex-direction: row;
+
+    }
+
+    .navLink {
+        font-size: 18px;
+        font-family: 'Newsreader', serif;
+        -webkit-font-smoothing: antialiased;
+        outline:none;
+        background:#FFF;
+        margin: 0 5px;
+      
+        border:none;
+        width:80px;
+        height:30px;
+    }
+    
+    .big {
+      
+        width:130px;
+        height:30px;
+    }
+    
   }

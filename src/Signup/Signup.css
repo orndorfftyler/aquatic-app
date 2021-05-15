@@ -12,17 +12,8 @@ footer {
   bottom:0;
   height: 50px;
   width:100%;
-  background-color: #9FE6FD;
+  background-color: #D7FFD8;
   z-index: 10;
-}
-
-.look {
-  font-family: "Open Sans",
-  sans-serif;
-  font-size: 20px;
-  color: #444;
-  text-align: center;
-  line-height: 1.5;
 }
 
 header {
@@ -80,17 +71,17 @@ label {
 input.signup {
   margin:auto;
   margin-bottom: 10px;
-  height:40px;
+  height:22px;
   width:200px;
-  font-size:24px;
-  font-family:'Fjalla One',sans-serif;
+  font-size:18px;
+  font-family: 'Newsreader', serif;
 }
 
 button.signup {
   font-size: 18px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   outline:none;
-  background:#9FE6FD;
+  background:#D7FFD8;
 
   border:none;
   width:105px;
@@ -105,6 +96,11 @@ button.signup {
   margin-top: 30px;
 }
 
+h3 {
+  font-size: 15px;
+}
+
+
 @media all and (min-width: 1000px) {
 
   .container {
@@ -112,8 +108,8 @@ button.signup {
   }
 
   input.signup {
-    height:22px;
-    font-size:20px;
+    height:40px;
+    font-size:24px;
     width:400px;
   }
 
@@ -122,9 +118,13 @@ button.signup {
   }
 
   button.signup {
-    font-size: 20px;
+    font-size: 22px;
     width:90px;
     height:36px;
+  }
+
+  h3 {
+    font-size: 20px;
   }
 
 }

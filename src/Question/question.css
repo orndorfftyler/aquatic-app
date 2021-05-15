@@ -3,20 +3,18 @@
 }
 
 .look {
-  font-family: "Open Sans",
-  sans-serif;
+  font-family: 'Newsreader', serif;
   font-size: 20px;
-  color: #444;
+  color: #000;
   text-align: center;
   line-height: 1.5;
   min-width: 320px;
 }
 
 .question-page {
-  font-family: "Open Sans",
-  sans-serif;
+  font-family: 'Newsreader', serif;
   font-size: 20px;
-  color: #444;
+  color: #000;
   text-align: center;
   line-height: 1.5;
   min-width: 320px;
@@ -33,21 +31,27 @@ input.question {
   margin-bottom: 10px;
   height:40px;
   font-size:24px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
 }
+
+#title {
+  font-size:18px;
+}
+
 
 textarea.question {
   width: 200px;
   margin-bottom: 10px;
   font-size:14px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   height:200px;
 }
 
 form.question {
   width: 300px;
   margin:auto;
-  background: #9FE6FD;
+  background: #D7FFD8;
+  text-align: center;
 
 }
 
@@ -57,7 +61,7 @@ h3.prompt {
 
 button.question {
   font-size: 18px;
-  font-family:'Fjalla One',sans-serif;
+  font-family: 'Newsreader', serif;
   outline:none;
   background:#FFF;
 
@@ -75,6 +79,11 @@ button.question {
   input.question {
     width: 400px;
     height:28px;
+
+  }
+
+  #title {
+    font-size:24px;
   }
 
   textarea.question {

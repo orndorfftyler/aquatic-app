@@ -84,23 +84,24 @@ class NewQuestion extends React.Component {
         return (
             <div className="look">
                 <Navbar />
+                <header className="search">
+                    <h1>What is your question?</h1>
+                </header>
+
                 <main role="main">
  
-                <form className="question" onSubmit={(e) => this.postQuestion(e, this.state.title, this.state.content)}>
-                        <section className="centered">
-                            <h3>What is your question?</h3>
-                        </section>
+                <form className="edit" onSubmit={(e) => this.postQuestion(e, this.state.title, this.state.content)}>
 
                         <section className="prompt">
                                 <label htmlFor="title">Title</label>
-                                <input  className="question" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
+                                <input  className="edit" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" required />
 
                                 <label htmlFor="content">Content:</label>
-                                <textarea  className="question" type="text" name="content" placeholder="Write your answer here" required onChange={e => this.updateContent(e.target.value)}>
+                                <textarea  className="edit" type="text" name="content" placeholder="Write your answer here" required onChange={e => this.updateContent(e.target.value)}>
                                 
                                 </textarea>
                                 <div>
-                                    <button className="question" type="submit">Submit</button>
+                                    <button className="edit" type="submit">Submit</button>
                                 </div>
                             </section>
 

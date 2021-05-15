@@ -81,9 +81,8 @@ class Question extends React.Component {
                 <Navbar 
                     historyProp={this.props.history}
                 />
-
-                <div className="spacer"></div>
-                <p className="answerList">Question:</p>
+                <div className="topSpace"></div>
+                <p className="answerList " > Question:</p>
                 <Result 
                     title={current.title}
                     username={current.username}

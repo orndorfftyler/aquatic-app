@@ -76,7 +76,7 @@ class Result extends React.Component {
     }
 
     storeResults(question_id) {
-        //this.context.updateSearchResults(this.context.results)
+        this.context.updateSearchResults(this.context.results)
         this.context.getAnswers(question_id)
     }
 
@@ -84,7 +84,7 @@ class Result extends React.Component {
 
     render() {
 
-        let deleteNotice = this.state.justDeleted ? <p>Question will be removed shortly!</p> : <p></p>
+        let deleteNotice = this.state.justDeleted ? <p>Question has been removed</p> : <p></p>
 
         let buttonVersion = '';
         if (this.props.contents && this.props.contents.split(' ').length > 50) {
@@ -102,9 +102,9 @@ class Result extends React.Component {
             <section className="result">
                 <Link onClick={() => this.storeResults(this.props.question_id)} to={`question/${this.props.question_id}`}><h2>{this.props.title}</h2></Link>
                     <div className="desc">
+                    <p>Author: {this.props.username}</p>
                         <p>{descText}</p>
                         {buttonVersion}
-                        <p>Author: {this.props.username}</p>
 
                         
                     </div>
@@ -116,8 +116,8 @@ class Result extends React.Component {
             <section className="result">
                 <h2>{this.props.title}</h2>
                     <div className="desc">
-                        <p>{this.props.contents}</p>
                         <p>Author: {this.props.username}</p>
+                        <p>{this.props.contents}</p>
 
                         
                     </div>
@@ -145,8 +145,8 @@ class Result extends React.Component {
             <section className="result">
                 <h2>{this.props.title}</h2>
                         <div className="desc">
-                            <p>{this.props.contents}</p>
                             <p>Author: {this.props.username}</p>
+                            <p>{this.props.contents}</p>
                             {editDeleteButtons}
                             {deleteNotice}
                         </div>
@@ -159,7 +159,6 @@ class Result extends React.Component {
             resultVersion = (
                 <form className="edit" onSubmit={(e) => this.editQuestionHideInput(e)}>
                     <section>
-                        <h2>{this.props.title}</h2>
                         <label htmlFor="title">Title</label>
                         <input className="edit" onChange={e => this.updateTitle(e.target.value)} name="title" type="text" id="title" defaultValue={this.state.title} required />
 

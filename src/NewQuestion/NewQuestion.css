@@ -1,92 +1,68 @@
-* {
-  box-sizing: border-box;
+input.edit {
+  width: 200px;
+  margin-bottom: 10px;
+  height:40px;
+  font-size:24px;
+  font-family: 'Newsreader', serif;
 }
 
-body {
-  font-family: "Open Sans",
-  sans-serif;
-  font-size: 20px;
-  color: #444;
+textarea.edit {
+  width: 200px;
+  margin-bottom: 10px;
+  font-size:14px;
+  font-family: 'Newsreader', serif;
+  height:200px;
+
+}
+
+form.edit {
+  width: 300px;
+  margin:auto;
   text-align: center;
-  line-height: 1.5;
-  min-width: 320px;
 }
 
-nav,
-footer {
-  padding: 1% 0;
-  background-color: #aaa;
+button.edit, button.helpful {
+  font-size: 18px;
+  font-family: 'Newsreader', serif;
+  outline:none;
+  background:#FFF;
+
+  border-radius: 10px;
+  border:none;
+  width:105px;
+  height:40px;
+  margin:10px;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
 
-header {
-  padding: 45px 15px;
-}
 
-section {
-  padding: 30px 15px 0;
-}
 
-section:nth-child(odd) {
-  background-color: #ddd;
-}
+@media all and (min-width: 1000px) {
+    
 
-p, h2 {
-  margin: 23px 0;
-}
+  input.edit {
+    width: 400px;
+    height:28px;
+  }
 
-h2 {
-  font-weight: 700;
-  font-size: 20px;
-}
+  textarea.edit {
+    width: 400px;
+    font-size:20px;
 
-form {
-  margin: 0 auto;
-  padding: 0 0 40px;
-  max-width: 650px;
-}
+  }
 
-label p {
-  margin: 6px 0 23px;
-}
+  form.edit {
+    width:430px;
+    text-align: left;
 
-p + p {
-  margin-top: 15px;
-}
+  }
 
-form {
-  text-align: left;
-}
+  button.edit {
+    font-size: 20px;
 
-label {
-  display: block;
-}
+    width:90px;
+    height:36px;
+  }
 
-input[type="number"] {
-  width: 50px;
-}
 
-.form-section {
-  margin-bottom: 30px;
 }
-
-.button-section {
-  padding: 0 0 0 15px;
-}
-
-.overview-section input,
-.overview-section textarea {
-  width: 100%;
-}
-.login-signup-section label {
-  display: inline;
-}
-  
-  
