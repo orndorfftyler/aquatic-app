@@ -2,17 +2,10 @@
     box-sizing: border-box;
   }
   
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-  }
   
   div.top-bar {
   height: 50px;
-  background-color: #D7FFD8;
+  background-color: #8CEDE0;
   top: -0;
   left: 0;
   right: 0;
@@ -20,8 +13,8 @@
 
 }
 
-  .grey {
-    background-color: #ddd;
+  .green {
+    background-color: #D7FFD8;
 
   }
 

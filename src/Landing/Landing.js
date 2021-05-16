@@ -23,7 +23,7 @@ class Landing extends React.Component {
                         <Link to='/search'><button type="button">Let's Go!</button></Link>
                     </header>
 
-                    <section className="landing grey">
+                    <section className="landing green">
                         <h3>Have a question about your aquatic pets?</h3>
                         <p>Get instant answers from experts in the community.</p>
                     </section>
@@ -33,7 +33,7 @@ class Landing extends React.Component {
                         <p>Help out the community and make new friends!</p>
                     </section>
 
-                    <section className="landing grey">
+                    <section className="landing green">
                         <h3>Trying to decide what kind of equipment to get? No problem!</h3>
                         <p>Ask any aquarium related question and let the community help you out.</p>
                     </section>

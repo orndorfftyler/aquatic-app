@@ -108,6 +108,8 @@ class NewQuestion extends React.Component {
 
                     </form>
                 </main>
+                <div className="search-space"></div>
+
             </div>
         );
     }

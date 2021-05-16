@@ -63,8 +63,8 @@ class Answer extends React.Component {
             <div className="answer">
                 <h2>{this.props.title}</h2>
                     <div>
-                        <p>{this.props.contents}</p>
                         <p>Author: {this.props.username}</p>
+                        <p>{this.props.contents}</p>
                     </div>
             </div>
         );
@@ -74,8 +74,8 @@ class Answer extends React.Component {
                 <div className="answer">
                     <h2>{this.props.title}</h2>
                         <div>
-                            <p>{this.props.contents}</p>
                             <p>Author: {this.props.username}</p>
+                            <p>{this.props.contents}</p>
                             <button  className="edit" type="submit" onClick={(e) => this.editOn(e)}>Edit</button>
                             <button  className="edit" type="submit" onClick={(e) => this.context.deleteAnswer(e, this.props.answer_id, this.props.question_id)}>Delete</button>
                         </div>

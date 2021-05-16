@@ -38,7 +38,7 @@ export default class Nav extends React.Component {
 
         if (!TokenService.hasAuthToken()) {
             buttons = (
-                <nav className='Nav'>
+                <nav className='Nav-login'>
                     <div className="navLink"><Link to='/login' style={{ textDecoration: 'none' }}>Log In</Link></div>
                 </nav>
             );
