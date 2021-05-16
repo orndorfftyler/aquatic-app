@@ -35,7 +35,7 @@ class Question extends React.Component {
     componentDidMount = () => {
 
         window.scrollTo(0,0);
-        this.context.getOneQuestion(this.props.match.params.question_id)
+        //this.context.getOneQuestion(this.props.match.params.question_id)
 
     }
 
