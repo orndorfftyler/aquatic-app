@@ -49,6 +49,9 @@ class Question extends React.Component {
         let question_id = this.props.match.params.question_id;
         let current = this.context.results.find(question => question.question_id == question_id);
 
+        console.log(`this.context.results: ${JSON.stringify(this.context.results)}`)
+        console.log(`this.context.answers: ${JSON.stringify(this.context.answers)}`)
+
         let answerUserCheck = 'question show';
         if (this.context.currentUser) {
             for (let i = 0; i < this.context.answers.length; i++) {

@@ -356,7 +356,6 @@ console.log(newOne)
     const contextValue = {
       results: this.state.results,
       answers: this.state.answers,
-      users: this.state.users, 
       currentUser: this.state.currentUser,
       currentUsername: this.state.currentUsername,
       term: this.state.term,

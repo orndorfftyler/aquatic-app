@@ -4,7 +4,6 @@ const AquaticContext = React.createContext({
   results: [],
   searchResults: [],
   answers: [],
-  users: [],
   currentUser: '',
   currentUsername: '',
   loggedIn: false,
