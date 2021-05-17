@@ -17,30 +17,31 @@ export default class Nav extends React.Component {
 
     render() {
         let displayUser = this.context.currentUsername 
-            ? this.context.currentUsername 
-            : 'none';
+            ? `Current User: ${this.context.currentUsername}`
+            : '';
 
         let buttons = (
-
-            <nav className='Nav'>
-
-                    <p>Current User: {displayUser}</p>
-                <div className="flexRow">
-                    <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }} onClick={this.handleLogoutClick}>Log Out</Link></div>
-                    <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }}>Search</Link></div>
-                </div>
-                <div className="flexRow">
-                    <div className="navLink big"><Link to='/new' style={{ textDecoration: 'none' }}>New Question</Link></div>
-                    <div className="navLink big"><Link to='/personal' style={{ textDecoration: 'none' }}>My Questions</Link></div>
-                </div>
+            <nav className='Nav-login'>
+                <div className="navLink"><Link to='/login' style={{ textDecoration: 'none' }}>Log In</Link></div>
             </nav>
+
         );
 
-        if (!TokenService.hasAuthToken()) {
+        if (TokenService.hasAuthToken()) {
             buttons = (
-                <nav className='Nav-login'>
-                    <div className="navLink"><Link to='/login' style={{ textDecoration: 'none' }}>Log In</Link></div>
+                <nav className='Nav'>
+
+                        <p>{displayUser}</p>
+                    <div className="flexRow">
+                        <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }} onClick={this.handleLogoutClick}>Log Out</Link></div>
+                        <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }}>Search</Link></div>
+                    </div>
+                    <div className="flexRow">
+                        <div className="navLink big"><Link to='/new' style={{ textDecoration: 'none' }}>New Question</Link></div>
+                        <div className="navLink big"><Link to='/personal' style={{ textDecoration: 'none' }}>My Questions</Link></div>
+                    </div>
                 </nav>
+        
             );
         }
             
