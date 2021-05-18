@@ -213,9 +213,9 @@ console.log(newOne)
             throw new Error(res.status)
           })
           .then(resJson =>
-            {
-            this.buildResults(resJson)
-            this.updateSearchResults(resJson)
+            { 
+              this.buildResults(resJson)
+              this.updateSearchResults(this.state.results)
             }
             )
           .catch(error => console.log({ error }))
@@ -229,7 +229,21 @@ console.log(newOne)
     for (let i = 0; i < arr.length; i++) {
       out.push(arr[i])
     }
-    this.setState({results: out})
+
+    let out2 = [];
+    for (let i = 0; i < out.length; i++) {
+      let rFlag = true;
+
+      for (let j = 0; j < out2.length; j++) {
+        if (out[i]['question_id'] == out2[j]['question_id']) 
+        rFlag = false;
+      }
+      if (rFlag) {
+        out2.push(out[i])
+      }
+    }
+
+    this.setState({results: out2})
   }
 
   clearResults = () => {
@@ -342,6 +356,7 @@ console.log(newOne)
       out.push(sResults[i])
     }
     */
+   
     this.setState({searchResults: sResults})
   }
   
