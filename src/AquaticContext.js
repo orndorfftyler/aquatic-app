@@ -27,8 +27,6 @@ const AquaticContext = React.createContext({
   clearUserAndUsername: () => {},
   updateSearchResults: () => {},
   setResults: () => {}
-
-
 })
 
 export default AquaticContext;

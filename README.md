@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Aquatic Answers (Client)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Try out the app here: https://aquatic-app2.vercel.app/
 
-## Available Scripts
+Aquatic Answers API repo: https://github.com/orndorfftyler/aquatic-app-api
 
-In the project directory, you can run:
+### Summary
 
-### `npm start`
+Aquatic Answers allows you to ask questions and get answers related to aquariums. All visitors to the site are able to search for questions that have already been asked and view their answers. After logging in or signing up, users may also post their own questions and post answers to other people's questions.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Tech Used
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Built with HTML, CSS, JavaScript, React, React Router, Node.js, Express, Knex, PostgresSQL. \
+Frontend deployed using Vercel. Backend deployed using Heroku.
 
-### `npm test`
+### API Documentation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Aquatic App API endpoints:
 
-### `npm run build`
+POST /api/auth/login
+- returns a JWT if user credentials are valid 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+GET /api/questionsearch/:search_terms
+- searches the questions table for entries matching the search terms
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+GET /api/questionsperuser/:user_id
+- gets all questions written by a specific user
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+POST /api/questions/
+- creates a new question
 
-### `npm run eject`
+PATCH /api/questions/:question_id
+- updates an existing question
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+DELETE /api/questions/:question_id
+- deletes a question
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+GET /api/answersperquestion/:question_id
+- gets all answers associated with a given question
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+POST /api/answers/:answer_id
+- creates a new answer 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+PATCH /api/answers/:answer_id
+- updates an existing answer
 
-## Learn More
+DELETE /api/answers/:answer_id
+- deletes an answer
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Screenshots
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Search page (mobile view):
 
-### Code Splitting
+<img src="./screenshots/aquatic-answers-search.PNG" width="300">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Question page:
 
-### Analyzing the Bundle Size
+<img src="./screenshots/aquatic-answers-question-page.PNG" width="500">
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Question page (edit mode):
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img src="./screenshots/aquatic-answers-question-page-edit.PNG" width="500">

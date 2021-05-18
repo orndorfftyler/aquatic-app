@@ -105,43 +105,43 @@ class Signup extends React.Component {
         );
 
         return (
-                <div className="signup-page look">
-                    <div className="top-bar"></div>
-                    <main role="main">
-                        <header>
-                            <h1>Sign up for Aquatic Answers!</h1>
-                        </header>
-            
-                        <form className="signup" onSubmit={(e) => this.handleSignup(e, this.state.username, this.state.pw1)}>
-                            <section className="overview-section">
-                                <label htmlFor="username">Username</label>
-                                <input className="signup" type="text" name="username"  required onChange={e => this.usernameUpdate(e.target.value)}/>
+            <div className="signup-page look">
+                <div className="top-bar"></div>
+                <main role="main">
+                    <header>
+                        <h1>Sign up for Aquatic Answers!</h1>
+                    </header>
+        
+                    <form className="signup" onSubmit={(e) => this.handleSignup(e, this.state.username, this.state.pw1)}>
+                        <section className="overview-section">
+                            <label htmlFor="username">Username</label>
+                            <input className="signup" type="text" name="username"  required onChange={e => this.usernameUpdate(e.target.value)}/>
 
-                                {pwSection}
-                            </section>
-                            
-                            <section className="login-signup-section">
-                                <div className="valerror">
-                                    <SignupLoginErr 
-                                        message={this.validatePw()}
-                                    />
-                                </div>
-                                {nowLogin}
-                                <div className="linkdiv">
-                                </div>
-                                <div >
-                                    {alreadySU}
-                                </div>
+                            {pwSection}
+                        </section>
+                        
+                        <section className="login-signup-section">
+                            <div className="valerror">
+                                <SignupLoginErr 
+                                    message={this.validatePw()}
+                                />
+                            </div>
+                            {nowLogin}
+                            <div className="linkdiv">
+                            </div>
+                            <div >
+                                {alreadySU}
+                            </div>
 
-                            </section>  
+                        </section>  
 
-                            <section className="button-section">
-                                {buttonSection}
-                                {errorMessage}
-                            </section>
-                        </form>
-                    </main>
-                </div>
+                        <section className="button-section">
+                            {buttonSection}
+                            {errorMessage}
+                        </section>
+                    </form>
+                </main>
+            </div>
         );
     }
 }

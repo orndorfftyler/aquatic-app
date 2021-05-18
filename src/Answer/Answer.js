@@ -1,11 +1,9 @@
 import React from 'react';
 import AquaticContext from '../AquaticContext';
 import {withRouter} from 'react-router-dom'
-import TokenService from '../services/token-service';
 import './Answer.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
 
 class Answer extends React.Component {
 
@@ -57,7 +55,6 @@ class Answer extends React.Component {
     }
 
     render() {
-
 
         let answerContents = (
             <div className="answer">

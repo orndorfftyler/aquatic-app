@@ -17,8 +17,6 @@ class Question extends React.Component {
             showHideAnswerInput: 'show'
         }
     }
-
-
     
     updateContent(content) {
         this.setState({content: content});
@@ -33,10 +31,7 @@ class Question extends React.Component {
     }
 
     componentDidMount = () => {
-
         window.scrollTo(0,0);
-        //this.context.getOneQuestion(this.props.match.params.question_id)
-
     }
 
     showHideAnswer(e, question_id, title, content) {
@@ -48,9 +43,6 @@ class Question extends React.Component {
     render() {
         let question_id = this.props.match.params.question_id;
         let current = this.context.results.find(question => question.question_id == question_id);
-
-        console.log(`this.context.results: ${JSON.stringify(this.context.results)}`)
-        console.log(`this.context.answers: ${JSON.stringify(this.context.answers)}`)
 
         let answerUserCheck = 'question show';
         if (this.context.currentUser) {
@@ -75,7 +67,6 @@ class Question extends React.Component {
         if (!this.context.currentUsername) {
             answerUserCheck = 'question hide';
         }
-        
         
         return (
             
@@ -114,15 +105,13 @@ class Question extends React.Component {
                     </div>
                 </div>
 
-                    <AnswerList 
-                        answers={this.context.answers}
-                        currentQuestion={current}
-                        historyProp={this.props.history}
-                    />
-                    
+                <AnswerList 
+                    answers={this.context.answers}
+                    currentQuestion={current}
+                    historyProp={this.props.history}
+                />
                 <div className="spacer"></div>
             </div>
-            
     );
     }
 }

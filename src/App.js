@@ -17,7 +17,6 @@ import './App.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -30,17 +29,16 @@ class App extends Component {
       loggedIn: false,
       term: '',
       currentQuestion: ''
-
-
     }
   }
+  
+// ----------------------------------------- answer related fetches (and helpers)
 
   setLogged = (input) => {
     this.setState({
       loggedIn:input
     })
   }
-
 
   paramFormat(params) {
     const queryItems = Object.keys(params)
@@ -55,11 +53,7 @@ class App extends Component {
   }
 
   getAnswers = (question_id) => {
-    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`/*, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-    }*/)
+    fetch(`${API_BASE_URL}/answersperquestion/${question_id}`)
       .then(res => {
         if (res.ok) {
           return res.json()
@@ -80,8 +74,6 @@ class App extends Component {
     let newId = uuid();
     let cUser = this.state.currentUsername ? this.state.currentUsername : localStorage.getItem('currentUsername');
 
-    console.log(`cUser:  ${cUser} type: ${typeof cUser}`)
-
     let newOne = {
       answer_id: newId,
       question_id: question_id,
@@ -91,8 +83,6 @@ class App extends Component {
       username: cUser
 
     }
-
-console.log(newOne)
 
     fetch(`${API_BASE_URL}/answers/${newOne.answer_id}`, {
         method: 'POST',
@@ -173,7 +163,6 @@ console.log(newOne)
       
     })
     .then(resJson => {
-      console.log(`username response: ${resJson.id}`);
       this.setState({currentUser: resJson.id, currentUsername: username})
       localStorage.setItem('currentUsername',username);
       localStorage.setItem('currentUser', resJson.id);
@@ -182,7 +171,7 @@ console.log(newOne)
     
   }
 
-//----------------------------------------- question related fetches
+// ----------------------------------------- question related fetches (and helpers)
 
   updateTerm = (value) => {
     this.setState({term: value});
@@ -192,20 +181,11 @@ console.log(newOne)
     e.preventDefault();
     this.clearResults();
     let terms = this.state.term.toLowerCase();
-    console.log(`terms = ${terms}`)
     let termsArr = terms.split(' ');
-    console.log(`termsArr = ${termsArr}`)
-
-    console.log(termsArr)
-    console.log('this.state.results.length ' + this.state.results.length)
     for (let i = 0; i < termsArr.length; i++) {
     
       if (this.state.results.length < 10 ) {
-        fetch(`${API_BASE_URL}/questionsearch/${termsArr[i]}`/*, {
-          headers: {
-            'authorization': `bearer ${TokenService.getAuthToken()}`,
-          },
-        }*/)
+        fetch(`${API_BASE_URL}/questionsearch/${termsArr[i]}`)
           .then(res => {
             if (res.ok) {
               return res.json()
@@ -221,7 +201,6 @@ console.log(newOne)
           .catch(error => console.log({ error }))
       }
     }
-    console.log(this.state.results)
   }
 
   buildResults = (arr) => {
@@ -230,6 +209,7 @@ console.log(newOne)
       out.push(arr[i])
     }
 
+    // removes duplicates from results
     let out2 = [];
     for (let i = 0; i < out.length; i++) {
       let rFlag = true;
@@ -251,7 +231,6 @@ console.log(newOne)
   }
 
   getPersonalQuestions = (user_id) => {
-    //e.preventDefault();
     this.clearResults();
     
     fetch(`${API_BASE_URL}/questionsperuser/${user_id}`, {
@@ -272,7 +251,6 @@ console.log(newOne)
         )
       .catch(error => console.log({ error }))
           
-    console.log(this.state.results)
   }
 
   patchQuestion = (e, question) => {    
@@ -309,9 +287,6 @@ console.log(newOne)
             }
         })
         .then(data => {
-          //this.setState({})
-          //this.getPersonalQuestions(this.state.currentUser);
-            
         })
         .catch(error => {
           console.error(error)
@@ -319,11 +294,7 @@ console.log(newOne)
   }
 
   getOneQuestion = (question_id) => {
-    fetch(`${API_BASE_URL}/questions/${question_id}`/*, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-    }*/)
+    fetch(`${API_BASE_URL}/questions/${question_id}`)
       .then(res => {
         if (res.ok) {
           return res.json()
@@ -331,11 +302,10 @@ console.log(newOne)
         throw new Error(res.status)
       })
       .then(resJson =>
-        //this.populateAnswers(resJson)
         {let temp = [resJson];
         this.setState({results: temp})
         }
-        )
+      )
       .catch(error => console.log({ error }))
   }
 
@@ -350,16 +320,10 @@ console.log(newOne)
   }
 
   updateSearchResults = (sResults) => {
-    /*
-    let out = this.state.searchResults;
-    for (let i = 0; i < sResults.length; i++) {
-      out.push(sResults[i])
-    }
-    */
-   
+    // Search results are recorded separately so that when a user navigates back to the search
+    // screen after clicking a result, the results from the last search are still displayed.
     this.setState({searchResults: sResults})
   }
-  
 
   setResults = (results) => {
     this.setState({
@@ -403,46 +367,46 @@ console.log(newOne)
     <div className='App'>
       <AquaticContext.Provider value={contextValue}>
 
-      <main>
-        <Route 
-          exact path='/'
-          component={Landing}
-        />
+        <main>
+          <Route 
+            exact path='/'
+            component={Landing}
+          />
 
-        <Route 
-          path='/signup'
-          component={Signup}
-          historyProp={this.props.history}
-        />
+          <PublicOnlyRoute 
+            path='/signup'
+            component={Signup}
+            historyProp={this.props.history}
+          />
 
-        <PublicOnlyRoute 
-          path='/login'
-          component={Login}
-          historyProp={this.props.history}
-        />
+          <PublicOnlyRoute 
+            path='/login'
+            component={Login}
+            historyProp={this.props.history}
+          />
 
-        <PrivateRoute 
-          path='/new'
-          component={NewQuestion}
-          historyProp={this.props.history}
-        />
+          <PrivateRoute 
+            path='/new'
+            component={NewQuestion}
+            historyProp={this.props.history}
+          />
 
-        <Route 
-          path='/personal'
-          component={Personal}
-        />
+          <PrivateRoute 
+            path='/personal'
+            component={Personal}
+          />
 
-        <Route 
-          path='/search'
-          component={Search}
-        />
+          <Route 
+            path='/search'
+            component={Search}
+          />
 
-        <Route 
-          path='/question/:question_id'
-          component={Question}
-        />
+          <Route 
+            path='/question/:question_id'
+            component={Question}
+          />
 
-      </main>
+        </main>
 
       </AquaticContext.Provider>
     </div>

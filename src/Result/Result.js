@@ -17,9 +17,7 @@ class Result extends React.Component {
             title: this.props.title,
             contents2: this.props.contents,
             justDeleted: false
-
         }
-        
     }
 
     showHideDesc() {
@@ -36,7 +34,6 @@ class Result extends React.Component {
         }
     }
 
-
     editOn(e) {
         e.preventDefault();
         this.setState({edit:true});
@@ -50,7 +47,7 @@ class Result extends React.Component {
         e.preventDefault();
         this.setState({edit:false});
 
-        this.context.patchQuestion(e, // make this fetch in app
+        this.context.patchQuestion(e, 
             {
                 question_id: this.props.question_id,
                 title: this.state.title,
@@ -79,8 +76,6 @@ class Result extends React.Component {
         this.context.updateSearchResults(this.context.results)
         this.context.getAnswers(question_id)
     }
-
-
 
     render() {
 
@@ -174,14 +169,12 @@ class Result extends React.Component {
                 </form>
             );
         }
-
-        
     
-    return (
-        <>
-        {resultVersion}
-        </>
-    )
+        return (
+            <>
+            {resultVersion}
+            </>
+        )
     }
 }
 

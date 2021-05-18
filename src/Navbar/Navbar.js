@@ -7,10 +7,8 @@ import './Navbar.css';
 export default class Nav extends React.Component {
     static contextType = AquaticContext;
 
-
     handleLogoutClick = () => {
         this.context.setLogged(false)
-        console.log('logged out')
         TokenService.clearAuthToken()
         this.context.clearUserAndUsername()
     }
@@ -30,8 +28,7 @@ export default class Nav extends React.Component {
         if (TokenService.hasAuthToken()) {
             buttons = (
                 <nav className='Nav'>
-
-                        <p>{displayUser}</p>
+                    <p>{displayUser}</p>
                     <div className="flexRow">
                         <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }} onClick={this.handleLogoutClick}>Log Out</Link></div>
                         <div className="navLink"><Link to='/search' style={{ textDecoration: 'none' }}>Search</Link></div>
@@ -41,7 +38,6 @@ export default class Nav extends React.Component {
                         <div className="navLink big"><Link to='/personal' style={{ textDecoration: 'none' }}>My Questions</Link></div>
                     </div>
                 </nav>
-        
             );
         }
             

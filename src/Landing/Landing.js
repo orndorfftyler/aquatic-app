@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 
 import './Landing.css';
 
-
 class Landing extends React.Component {
 
     render() {
         return (
             <div className="look landing">
                 <main role="main">
-                <div className="top-bar"></div>
+                    <div className="top-bar"></div>
 
                     <header role="banner" className="">
                         <h1>Aquatic Answers</h1>
@@ -18,7 +17,9 @@ class Landing extends React.Component {
                         <p>You can search for questions and view answers without being logged in. </p>
                         <p>You must be logged in to post, edit, and delete questions and answers or view the My Questions page.</p>
                         <p>The nav bar will have more options after logging in.</p>
-                        <p>Login info: username: admin pw: admin </p>
+                        <p>Login info: </p>
+                        <p>username: admin</p>
+                        <p>password: admin</p>
                         <p>For a good example question, search for "jellyfish" and select the first result.</p>
                         <Link to='/search'><button type="button">Let's Go!</button></Link>
                     </header>
