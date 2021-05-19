@@ -22,14 +22,8 @@ class AnswerList extends React.Component {
             )
         });
 
-        let title = '';
-        if (answers.length >= 1) {
-            title = <p className="answerList">Answers:</p>
-        }
-
         return (
             <>
-            {title}
             {answers2}
             </>
         )

@@ -67,6 +67,12 @@ class Question extends React.Component {
         if (!this.context.currentUsername) {
             answerUserCheck = 'question hide';
         }
+
+        let title = '';
+        if (this.context.answers.length >= 1) {
+            title = <p className="answerList">Answers:</p>
+        }
+
         
         return (
             
@@ -84,7 +90,7 @@ class Question extends React.Component {
                     question_id={current.question_id}
                     linkify={false}
                 />
-
+                {title}
                 <div className={answerUserCheck}>
                     <div className={this.state.showHideAnswerInput}>
                         <form className="question" onSubmit={(e) => this.showHideAnswer(e, current.question_id, this.state.title, this.state.content)}>
